@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -66,7 +67,13 @@ class _BankListState extends State<BankList> {
                 children: List.generate(100, (index) {
                   return Center(
                     child: Container(
-                      decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
+                      padding: const EdgeInsets.all(30),
+                      margin: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        shape: BoxShape.rectangle,
+                        color: Colors.white,
+                      ),
                       child: Text(
                         'Item $index',
                         style: Theme.of(context).textTheme.headline5,

@@ -124,8 +124,8 @@ class _HomeState extends State<Home> {
                           child: Text("TROUVER UN GAB"),
                           
                           textColor: Colors.white,
-                          padding: const EdgeInsets.all(15),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                          padding: const EdgeInsets.all(20),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
                           color: df_yellow,
                           onPressed: () {
                             Navigator.push(
@@ -138,16 +138,16 @@ class _HomeState extends State<Home> {
                         RaisedButton(
                           child: Text("DECLARER UN INCIDENT"),
                           textColor: Colors.white,
-                          padding: const EdgeInsets.all(15),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                          padding: const EdgeInsets.all(20),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
                           color: df_yellow,
                           onPressed: () {},
                         ),
                         RaisedButton(
                           child: Text("MARKETPLACE DIGITALE FINANCES"),
                           textColor: Colors.white,
-                          padding: const EdgeInsets.all(15),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                          padding: const EdgeInsets.all(20),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
                           color: df_yellow,
                           onPressed: _markertplaceUrl,
                         ),
