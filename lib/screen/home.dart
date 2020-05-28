@@ -117,11 +117,14 @@ class _HomeState extends State<Home> {
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
                         RaisedButton(
-                          child: Text("TROUVER UN GAB"),
+                          child: Text(
+                              "TROUVER UN GAB",
+                              style: TextStyle(fontSize: 18.0),
+                          ),
                           
                           textColor: Colors.white,
                           padding: const EdgeInsets.all(20),
@@ -134,17 +137,24 @@ class _HomeState extends State<Home> {
                             );
                           },
                         ),
-
+                        Divider(),
+                        Divider(),
                         RaisedButton(
-                          child: Text("DECLARER UN INCIDENT"),
+                          child: Text(
+                              "DECLARER UN INCIDENT",
+                            style: TextStyle(fontSize: 18.0),
+                          ),
                           textColor: Colors.white,
                           padding: const EdgeInsets.all(20),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
                           color: df_yellow,
                           onPressed: () {},
                         ),
+                        Divider(),
+                        Divider(),
                         RaisedButton(
-                          child: Text("MARKETPLACE DIGITALE FINANCES"),
+                          child: Text("MARKETPLACE DIGITALE FINANCES",
+                            style: TextStyle(fontSize: 18.0),),
                           textColor: Colors.white,
                           padding: const EdgeInsets.all(20),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
