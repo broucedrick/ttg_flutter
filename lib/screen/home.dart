@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'login.dart';
 import 'package:trouvetongab/screen/bank_list.dart';
+import 'login2.dart';
 import '../widgets/slide_dots.dart';
 import '../widgets/slide_item.dart';
 import '../model/slide.dart';
 import 'dart:async';
 import 'package:url_launcher/url_launcher.dart';
+
 
 class Home extends StatefulWidget {
   @override
@@ -103,7 +106,7 @@ class _HomeState extends State<Home> {
           Expanded(
             flex: 3,
             child: Container(   
-              alignment: AlignmentDirectional.center,             
+              alignment: AlignmentDirectional.center,
               child: Column(
                 children: <Widget>[
                   Container(
@@ -148,7 +151,12 @@ class _HomeState extends State<Home> {
                           padding: const EdgeInsets.all(20),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
                           color: df_yellow,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Login()),
+                            );
+                          },
                         ),
                         Divider(),
                         Divider(),
