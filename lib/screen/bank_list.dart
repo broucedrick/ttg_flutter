@@ -91,6 +91,8 @@ class _BankListState extends State<BankList> {
           title: Text('Banques'),
         ),
         body: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
           child: Column(
             children: <Widget>[
               Expanded(
@@ -125,7 +127,7 @@ class _BankListState extends State<BankList> {
                             constraints: BoxConstraints.expand(),
                             child:FlatButton(
                                 color: Colors.white,
-                                child: Image.network(
+                                child: Image.network('https://digitalfinances.innovstech.com/img/'+
                                   banks[index]['image'],
                                 ),
                                 onPressed: () {

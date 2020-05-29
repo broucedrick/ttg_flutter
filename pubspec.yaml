@@ -22,9 +22,11 @@ environment:
 
 dependencies:
   url_launcher: ^5.4.0
+  google_maps_flutter: ^0.5.28+1
   http: ^0.12.1
   flutter:
     sdk: flutter
+
 
 dependency_overrides:
   url_launcher: '5.4.0'
@@ -37,6 +39,7 @@ dependency_overrides:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

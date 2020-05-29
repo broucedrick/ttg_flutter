@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:trouvetongab/screen/bank_list.dart';
 import '../widgets/slide_dots.dart';
@@ -50,6 +51,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     
     Color df_yellow = Color(0xffe2b80e);
+    var mediaQuery = MediaQuery.of(context);
     // Scaffold is a layout for the major Material Components.
     return Scaffold(
       appBar: AppBar(
@@ -61,11 +63,15 @@ class _HomeState extends State<Home> {
         title: Text('Home'),
       ),
       // body is the majority of the screen.
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: Container(
+      body: Container(
+        width: mediaQuery.size.width,
+        height: mediaQuery.size.height,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              width: mediaQuery.size.width,
+              height: mediaQuery.size.height/4,
               child: Stack(
                 alignment: AlignmentDirectional.bottomCenter,
                 children: <Widget>[
@@ -74,7 +80,7 @@ class _HomeState extends State<Home> {
                     controller: _pageController,
                     onPageChanged: _onPageChanged,
                     itemCount: slideList.length,
-                    itemBuilder: (ctxt, i) => SlideItem(i),  
+                    itemBuilder: (ctxt, i) => SlideItem(i),
                   ),
                   Stack(
                     alignment: AlignmentDirectional.topStart,
@@ -97,93 +103,85 @@ class _HomeState extends State<Home> {
                   )
                 ],
               ),
-            )
-           
-          ),
-          Expanded(
-            flex: 3,
-            child: Container(   
-              alignment: AlignmentDirectional.center,             
+
+
+            ),
+            Container(
+              width: mediaQuery.size.width,
+              height: mediaQuery.size.height/2,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
+                color: Colors.white,
+              ),
+              alignment: AlignmentDirectional.center,
               child: Column(
-                children: <Widget>[
-                  Container(
-                    alignment: AlignmentDirectional.center,
-                    margin: const EdgeInsets.only(bottom: 8),
-                    height: MediaQuery.of(context).size.height/1.7,
-                    padding: const EdgeInsets.all(30),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(bottomRight: Radius.circular(30), bottomLeft: Radius.circular(30)),
-                      color: Colors.white
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        RaisedButton(
-                          child: Text(
+                        Container(
+                          child: RaisedButton(
+                            child: Text(
                               "TROUVER UN GAB",
-                              style: TextStyle(fontSize: 18.0),
+                              style: TextStyle(fontSize: 16.0),
+                            ),
+
+                            textColor: Colors.white,
+                            padding: const EdgeInsets.all(15),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+                            color: df_yellow,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => BankList()),
+                              );
+                            },
                           ),
-                          
-                          textColor: Colors.white,
-                          padding: const EdgeInsets.all(20),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-                          color: df_yellow,
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => BankList()),
-                            );
-                          },
                         ),
-                        Divider(),
-                        Divider(),
-                        RaisedButton(
-                          child: Text(
+                        Container(
+                          child: RaisedButton(
+                            child: Text(
                               "DECLARER UN INCIDENT",
-                            style: TextStyle(fontSize: 18.0),
+                              style: TextStyle(fontSize: 16.0),
+                            ),
+                            textColor: Colors.white,
+                            padding: const EdgeInsets.all(15),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+                            color: df_yellow,
+                            onPressed: () {},
                           ),
-                          textColor: Colors.white,
-                          padding: const EdgeInsets.all(20),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-                          color: df_yellow,
-                          onPressed: () {},
                         ),
-                        Divider(),
-                        Divider(),
-                        RaisedButton(
-                          child: Text("MARKETPLACE DIGITALE FINANCES",
-                            style: TextStyle(fontSize: 18.0),),
-                          textColor: Colors.white,
-                          padding: const EdgeInsets.all(20),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-                          color: df_yellow,
-                          onPressed: _markertplaceUrl,
+
+                        Container(
+                          child: RaisedButton(
+                            child: Text("MARKETPLACE DIGITALE FINANCES",
+                              style: TextStyle(fontSize: 16.0),),
+                            textColor: Colors.white,
+                            padding: const EdgeInsets.all(15),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+                            color: df_yellow,
+                            onPressed: _markertplaceUrl,
+                          ),
                         ),
-                    ],),
-                  ),
-                  Container(
-                    alignment: AlignmentDirectional.center,
-                    width: MediaQuery.of(context).size.width/3,
-                    child: Column(
-                      children: <Widget>[
-                        Center(
-                          child: Image(
-                            image: AssetImage('assets/images/df_logo.png')),
-                        )
-                        
+
+
                       ],
-                    ),
+
                   ),
-                  
-                ],)
-            ) 
-            
+
             ),
-            
-            
-        ],)
+
+           Expanded(
+             child: Image(
+               image: AssetImage('assets/images/df_logo.png'),
+               width: mediaQuery.size.width/3,
+             ),
+
+           )
+
+          ],
+        ),
+      )
+
            
     );
   }
