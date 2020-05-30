@@ -3,14 +3,20 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:trouvetongab/screen/agence.dart';
+import 'package:trouvetongab/model/bank.dart';
+import 'package:trouvetongab/screen/agences.dart';
 
 class AgenceGab extends StatefulWidget {
+  final String bankid;
+
+  AgenceGab(this.bankid);
+
   @override
   _AgenceGabState createState() => _AgenceGabState();
 }
 
 class _AgenceGabState extends State<AgenceGab> with SingleTickerProviderStateMixin{
+
 
   TabController controller;
 
@@ -44,7 +50,7 @@ class _AgenceGabState extends State<AgenceGab> with SingleTickerProviderStateMix
         body: TabBarView(
           controller: controller,
           children: [
-            new Agence(),
+            new Agences(int.parse(widget.bankid)),
             Icon(Icons.map),
           ],
         ),
@@ -52,4 +58,5 @@ class _AgenceGabState extends State<AgenceGab> with SingleTickerProviderStateMix
       );
 
   }
+
 }

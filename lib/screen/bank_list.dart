@@ -16,20 +16,21 @@ class Bank {
   final String title;
   final String image;
 
-  Bank({this.index, this.title, this.image});
+  Bank(this.index, this.title, this.image);
 
-  factory Bank.fromJson(Map<String, dynamic> json) {
-    return Bank(
-      index: json['id'],
-      title: json['title'],
-      image: json['image'],
-    );
-  }
+// factory Bank.fromJson(Map<String, dynamic> json) {
+//   return Bank(
+//     index: json['id'],
+//     title: json['student_name'],
+//     image: json['student_phone_number'],
+//   );
+// }
 }
 
 class _BankListState extends State<BankList> {
 
   List banks = [];
+  List<Bank> bks = [];
 
   /*Future<List<Bank>> _getBank() async{
     var data = await http.get('https://digitalfinances.innovstech.com/getBanque.php');
@@ -80,6 +81,9 @@ class _BankListState extends State<BankList> {
     if (response.statusCode == 200) {
       setState(() {
         banks = json.decode(response.body);
+        for(var bank in banks){
+          bks.add(new Bank(bank['id'], bank['title'], bank['image']));
+        }
       });
     }
   }
@@ -133,7 +137,7 @@ class _BankListState extends State<BankList> {
                                 onPressed: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => AgenceGab()),
+                                    MaterialPageRoute(builder: (context) => AgenceGab(banks[index]['id'].toString())),
                                   );
                                 },
 
@@ -169,4 +173,6 @@ class _BankListState extends State<BankList> {
     );
   }
 }
+
+
 
