@@ -60,7 +60,7 @@ class _HomeState extends State<Home> {
           tooltip: 'Navigation menu',
           onPressed: null,
         ),
-        title: Text('Home'),
+        title: Text('Trouve ton GAB'),
       ),
       // body is the majority of the screen.
       body: Container(
@@ -119,10 +119,11 @@ class _HomeState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
                         Container(
+                          margin: EdgeInsets.only(left: 20, right: 20),
                           child: RaisedButton(
                             child: Text(
                               "TROUVER UN GAB",
-                              style: TextStyle(fontSize: 16.0),
+                              style: TextStyle(fontSize: 15.0),
                             ),
 
                             textColor: Colors.white,
@@ -138,10 +139,11 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         Container(
+                          margin: EdgeInsets.only(left: 20, right: 20),
                           child: RaisedButton(
                             child: Text(
                               "DECLARER UN INCIDENT",
-                              style: TextStyle(fontSize: 16.0),
+                              style: TextStyle(fontSize: 15.0),
                             ),
                             textColor: Colors.white,
                             padding: const EdgeInsets.all(15),
@@ -152,9 +154,10 @@ class _HomeState extends State<Home> {
                         ),
 
                         Container(
+                          margin: EdgeInsets.only(left: 20, right: 20),
                           child: RaisedButton(
                             child: Text("MARKETPLACE DIGITALE FINANCES",
-                              style: TextStyle(fontSize: 16.0),),
+                              style: TextStyle(fontSize: 15.0),),
                             textColor: Colors.white,
                             padding: const EdgeInsets.all(15),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),

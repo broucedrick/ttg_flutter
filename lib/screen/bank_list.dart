@@ -30,43 +30,6 @@ class Bank {
 class _BankListState extends State<BankList> {
 
   List banks = [];
-  List<Bank> bks = [];
-
-  /*Future<List<Bank>> _getBank() async{
-    var data = await http.get('https://digitalfinances.innovstech.com/getBanque.php');
-
-    
-
-    // if (data.statusCode == 200) { 
-    //   List banks = json.decode(data.body);
-    //   print(banks.length);
-    //   return banks.map(
-    //     (bank) => new Bank.fromJson(bank)
-    //   ).toList();
-    // }else {
-    //   print('Failed to load data from Server.');
-    // }
-
-    var url = 'https://digitalfinances.innovstech.com/getBanque.php';
-
-
-    // Await the http get response, then decode the json-formatted response.
-    var response = await http.get(url);
-    if (response.statusCode == 200) {
-
-      var jsonResponse = convert.jsonDecode(response.body);
-      //print(jsonResponse);
-      for(var u in jsonResponse){
-        //print(u['image']);
-        banks.add(new Bank(u['id'], u['title'], u['image']));
-        print(banks);
-      }
-      print(banks.length);
-      return banks;
-    } else {
-      print('Request failed with status: ${response.statusCode}.');
-    }*/
-
 
   @override
   void initState() {
@@ -81,9 +44,6 @@ class _BankListState extends State<BankList> {
     if (response.statusCode == 200) {
       setState(() {
         banks = json.decode(response.body);
-        for(var bank in banks){
-          bks.add(new Bank(bank['id'], bank['title'], bank['image']));
-        }
       });
     }
   }

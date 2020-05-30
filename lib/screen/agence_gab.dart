@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:trouvetongab/model/bank.dart';
 import 'package:trouvetongab/screen/agences.dart';
+import 'package:trouvetongab/screen/gab_list.dart';
 
 class AgenceGab extends StatefulWidget {
   final String bankid;
@@ -51,7 +52,7 @@ class _AgenceGabState extends State<AgenceGab> with SingleTickerProviderStateMix
           controller: controller,
           children: [
             new Agences(int.parse(widget.bankid)),
-            Icon(Icons.map),
+            new GabList(int.parse(widget.bankid)),
           ],
         ),
 

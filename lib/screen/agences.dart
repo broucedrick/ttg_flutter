@@ -21,7 +21,7 @@ class _AgencesState extends State<Agences> {
 
   GoogleMapController myController;
 
-  final CameraPosition _initialPosition = CameraPosition(target: LatLng(5.317874, -4.0145789));
+  final CameraPosition _initialPosition = CameraPosition(target: LatLng(7.539988999999998, -5.547079999999999), zoom: 6);
 
   final List<Marker> markers = [];
 
@@ -31,7 +31,7 @@ class _AgencesState extends State<Agences> {
 
   @override
   void initState() {
-    fetchData();
+    fetchLatData();
     super.initState();
   }
 
@@ -45,7 +45,7 @@ class _AgencesState extends State<Agences> {
     });
   }
 
-  void fetchData() async {
+  void fetchLatData() async {
     final response = await http.get(
         'https://digitalfinances.innovstech.com/getAgenceLatLng.php?id='+widget.bankid.toString());
 
