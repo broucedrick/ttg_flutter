@@ -20,8 +20,6 @@ class _HomeState extends State<Home> {
     initialPage: 0
   );
 
-  String cgu =
-
   @override
   void initState() {
     super.initState();
