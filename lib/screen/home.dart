@@ -8,6 +8,8 @@ import '../widgets/slide_item.dart';
 import '../model/slide.dart';
 import 'dart:async';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:trouvetongab/screen/login.dart';
+
 
 class Home extends StatefulWidget {
   @override
@@ -152,7 +154,12 @@ class _HomeState extends State<Home> {
                             padding: const EdgeInsets.all(15),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
                             color: df_yellow,
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => Login()),
+                              );
+                            },
                           ),
                         ),
 

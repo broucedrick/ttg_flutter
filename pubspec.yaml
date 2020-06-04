@@ -25,6 +25,11 @@ dependencies:
   responsive_grid: ^1.1.1
   webview_flutter: ^0.3.22+1
   google_maps_flutter: ^0.5.28+1
+  form_field_validator: ^1.0.1
+  flutter_signin_button: ^1.0.0
+  rflutter_alert: ^1.0.3
+  progress_dialog: ^1.2.3
+
   http: ^0.12.1
   flutter:
     sdk: flutter
