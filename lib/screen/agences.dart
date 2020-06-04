@@ -56,7 +56,7 @@ class _AgencesState extends State<Agences> {
         for(var a in agences){
           markers.add(Marker(
               markerId: MarkerId(a['title']),
-              position: LatLng(double.parse(a['latitude']), double.parse(a['longitude']))
+              position: LatLng(double.parse(a['latitude']), double.parse(a['longitude'])),
           ));
         }
 

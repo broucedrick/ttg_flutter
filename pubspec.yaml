@@ -60,6 +60,7 @@ flutter:
     - assets/images/img2.jpg
     - assets/images/img3.jpg
     - assets/images/df_logo.png
+    - assets/images/Favicon_trouve_ton_gab.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

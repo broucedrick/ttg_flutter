@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:trouvetongab/screen/bank_list.dart';
+import 'package:trouvetongab/screen/drawer_view.dart';
 import '../widgets/slide_dots.dart';
 import '../widgets/slide_item.dart';
 import '../model/slide.dart';
@@ -17,6 +19,8 @@ class _HomeState extends State<Home> {
   final PageController _pageController = PageController(
     initialPage: 0
   );
+
+  String cgu =
 
   @override
   void initState() {
@@ -62,6 +66,7 @@ class _HomeState extends State<Home> {
         ),
         title: Text('Trouve ton GAB'),
       ),
+      drawer: DrawerView(),
       // body is the majority of the screen.
       body: Container(
         width: mediaQuery.size.width,

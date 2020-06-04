@@ -49,6 +49,7 @@ class _AgenceGabState extends State<AgenceGab> with SingleTickerProviderStateMix
         ),
 
         body: TabBarView(
+          physics: NeverScrollableScrollPhysics(),
           controller: controller,
           children: [
             new Agences(int.parse(widget.bankid)),
