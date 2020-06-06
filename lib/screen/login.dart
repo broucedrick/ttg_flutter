@@ -5,8 +5,7 @@ import 'package:trouvetongab/screen/home.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
-
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
@@ -76,13 +75,14 @@ class _State extends State<Login> {
 
   Future<List> connection() async {
     ProgressDialog pr = ProgressDialog(context,type: ProgressDialogType.Normal,isDismissible: true);
-   await pr.show();
+   SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    await pr.show();
     try{
       var rep = await  http.post("https://digitalfinances.innovstech.com/ios_connect.php", body: {
         "email": emailController.text,
         "mdp":passwordController.text,
       });
-
       if(rep.body.contains('0')){
         print('veillez vous inscrire');
         pr.hide();
@@ -98,15 +98,17 @@ class _State extends State<Login> {
         }
       }else if(rep.body.contains(('1'))){
         print('connection reuissi');
+        prefs.setString('email', emailController.text);
         if(pr.isShowing()){
           pr.hide();
-          print('connection reuissi');
           Navigator.push(context,
             MaterialPageRoute(builder: (context) => Home()),
           );
         }else{
           await pr.hide();
-          print('connection reuissi');
+         // print('connection reuissi');
+         //var pref = await prefs.setString('email', emailController.toString());
+         //print(emailController.toString());
           Navigator.push(context,
             MaterialPageRoute(builder: (context) => Home()),
           );
@@ -172,9 +174,9 @@ class _State extends State<Login> {
               children: <Widget>[
                 Container(
                     height: 50,
-                    width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                     child: SignInButton(
+
                       Buttons.Facebook,
                       text:"connexion avec Facebook",
                       onPressed: (){
@@ -234,8 +236,7 @@ class _State extends State<Login> {
                           _onBasicAlertPressed(context);
                         }else{
                           connection();
-
-                          pr.show();
+                          //pr.show();
 
                         }
                       },
@@ -243,6 +244,7 @@ class _State extends State<Login> {
                 Divider(),
 
                 Container(
+
                     child: Row(
                       children: <Widget>[
                         Text("Vous n'avez pas de compte ?"),

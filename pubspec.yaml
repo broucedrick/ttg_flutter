@@ -29,7 +29,7 @@ dependencies:
   flutter_signin_button: ^1.0.0
   rflutter_alert: ^1.0.3
   progress_dialog: ^1.2.3
-
+  shared_preferences: ^0.5.7+3
   http: ^0.12.1
   flutter:
     sdk: flutter

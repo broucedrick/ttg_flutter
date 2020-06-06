@@ -10,6 +10,9 @@ import 'dart:async';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:trouvetongab/screen/login.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
+
 
 class Home extends StatefulWidget {
   @override
@@ -17,6 +20,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
   int _currentPage = 0;
   final PageController _pageController = PageController(
     initialPage: 0
@@ -51,19 +55,35 @@ class _HomeState extends State<Home> {
       _currentPage = index;
     });
   }
+
+
+  verf()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var get = prefs.getString('email');
+    if(get.toString().contains('null')){
+      print(get.toString());
+      //Navigator.push(context,
+        //MaterialPageRoute(builder: (context) => Login()),
+      //);
+    }else{
+
+    }
+  }
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    
+    verf();
     Color df_yellow = Color(0xffe2b80e);
     var mediaQuery = MediaQuery.of(context);
     // Scaffold is a layout for the major Material Components.
     return Scaffold(
+        key: _scaffoldKey,
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          tooltip: 'Navigation menu',
-          onPressed: null,
-        ),
+          leading: IconButton(
+            icon: Icon(Icons.menu),
+            tooltip: 'Navigation menu',
+            onPressed: () => _scaffoldKey.currentState.openDrawer(),
+          ),
         title: Text('Trouve ton GAB'),
       ),
       drawer: DrawerView(),
@@ -155,10 +175,7 @@ class _HomeState extends State<Home> {
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
                             color: df_yellow,
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Login()),
-                              );
+                              //class to do incendie
                             },
                           ),
                         ),
