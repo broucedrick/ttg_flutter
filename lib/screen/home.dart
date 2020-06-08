@@ -9,6 +9,11 @@ import '../model/slide.dart';
 import 'dart:async';
 import 'package:url_launcher/url_launcher.dart';
 import 'incident.dart';
+import 'package:trouvetongab/screen/login.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
+
+
 
 class Home extends StatefulWidget {
   @override
@@ -16,12 +21,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
   int _currentPage = 0;
   final PageController _pageController = PageController(
     initialPage: 0
   );
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  get SharedPreferences => null;
 
 
   @override
@@ -53,9 +61,24 @@ class _HomeState extends State<Home> {
       _currentPage = index;
     });
   }
+
+
+  verf()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var get = prefs.getString('email');
+    if(get.toString().contains('null')){
+      print(get.toString());
+      //Navigator.push(context,
+        //MaterialPageRoute(builder: (context) => Login()),
+      //);
+    }else{
+
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
-    
+    verf();
     Color df_yellow = Color(0xffe2b80e);
     var mediaQuery = MediaQuery.of(context);
     // Scaffold is a layout for the major Material Components.
