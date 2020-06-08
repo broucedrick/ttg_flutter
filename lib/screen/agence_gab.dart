@@ -10,7 +10,9 @@ import 'package:trouvetongab/screen/gab_list.dart';
 class AgenceGab extends StatefulWidget {
   final String bankid;
 
-  AgenceGab(this.bankid);
+  final String title;
+
+  AgenceGab(this.bankid, this.title);
 
   @override
   _AgenceGabState createState() => _AgenceGabState();
@@ -37,7 +39,7 @@ class _AgenceGabState extends State<AgenceGab> with SingleTickerProviderStateMix
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Banque name"),
+          title: Text(widget.title),
           bottom: TabBar(
             controller: controller,
             indicatorColor: Color(0xffe2b80e),

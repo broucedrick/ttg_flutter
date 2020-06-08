@@ -61,6 +61,32 @@ flutter:
     - assets/images/img3.jpg
     - assets/images/df_logo.png
     - assets/images/Favicon_trouve_ton_gab.png
+    - assets/images/boa_marker.png
+    - assets/images/afb_marker.png
+    - assets/images/baci_marker.png
+    - assets/images/bda_marker.png
+    - assets/images/bduci_marker.png
+    - assets/images/bgfi_marker.png
+    - assets/images/bicici_marker.png
+    - assets/images/bmci_marker.png
+    - assets/images/bni_marker.png
+    - assets/images/bp_marker.png
+    - assets/images/bridge_marker.png
+    - assets/images/bsic_marker.png
+    - assets/images/citi_marker.png
+    - assets/images/coris_marker.png
+    - assets/images/diamond_marker.png
+    - assets/images/ecobank_marker.png
+    - assets/images/gtbank_marker.png
+    - assets/images/nhci_marker.png
+    - assets/images/nsia_marker.png
+    - assets/images/orabank_marker.png
+    - assets/images/sgbci_marker.png
+    - assets/images/sib_marker.png
+    - assets/images/stanbic_marker.png
+    - assets/images/stc_marker.png
+    - assets/images/uba_marker.png
+    - assets/images/versus_marker.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

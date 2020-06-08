@@ -9,10 +9,7 @@ class GabListItem extends StatelessWidget {
   GabListItem(this.title, this.location);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Card(
+    return Card(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -53,9 +50,7 @@ class GabListItem extends StatelessWidget {
                 )
               ],
             ),
-          )
-        ],
-      ),
+
     );
   }
 }

@@ -8,6 +8,7 @@ import '../widgets/slide_item.dart';
 import '../model/slide.dart';
 import 'dart:async';
 import 'package:url_launcher/url_launcher.dart';
+import 'incident.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -19,6 +20,9 @@ class _HomeState extends State<Home> {
   final PageController _pageController = PageController(
     initialPage: 0
   );
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
 
   @override
   void initState() {
@@ -56,15 +60,16 @@ class _HomeState extends State<Home> {
     var mediaQuery = MediaQuery.of(context);
     // Scaffold is a layout for the major Material Components.
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: DrawerView(),
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.menu),
           tooltip: 'Navigation menu',
-          onPressed: null,
+          onPressed: () => _scaffoldKey.currentState.openDrawer(),
         ),
         title: Text('Trouve ton GAB'),
       ),
-      drawer: DrawerView(),
       // body is the majority of the screen.
       body: Container(
         width: mediaQuery.size.width,
@@ -152,7 +157,12 @@ class _HomeState extends State<Home> {
                             padding: const EdgeInsets.all(15),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
                             color: df_yellow,
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => Incident())
+                              );
+                            },
                           ),
                         ),
 

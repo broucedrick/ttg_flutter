@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -21,18 +22,12 @@ class Itineraire extends StatelessWidget {
         title: Text(title),
       ),
       body: WebView(
-              javascriptMode: JavascriptMode.unrestricted,
-              initialUrl: "<html>\n"
-                  "       <head>\n\n"
-                  "       </head>\n"
-                  "      <body style=\"padding: 0\">\n"
-                  "        <iframe src=\"${url}\" width=\"100\" height=\"100\"/>\n"
-                  "    </body>\n"
-                  "</html>",
-              onWebViewCreated: (WebViewController webViewController) {
-                _controller.complete(webViewController);
-              },
-            ),
+        javascriptMode: JavascriptMode.unrestricted,
+        initialUrl: new Uri.dataFromString('<html><body><iframe src=\"${url}\" width=\"100%\" height=\"100%\"/></body></html>', mimeType: 'text/html').toString(),
+        onWebViewCreated: (WebViewController webViewController) {
+          _controller.complete(webViewController);
+        },
+      ),
     );
   }
 }

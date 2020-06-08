@@ -18,6 +18,7 @@ class Agences extends StatefulWidget {
 }
 
 class _AgencesState extends State<Agences> {
+  BitmapDescriptor pinLocationIcon;
 
   GoogleMapController myController;
 
@@ -32,6 +33,94 @@ class _AgencesState extends State<Agences> {
   @override
   void initState() {
     fetchLatData();
+    /*switch (widget.bankid){
+      case 1:
+        BitmapDescriptor.fromAssetImage(
+            ImageConfiguration(devicePixelRatio: 2.5),
+            'assets/images/boa_marker.png').then((onValue) {
+          pinLocationIcon = onValue;
+        });
+        break;
+      case 2:
+
+        break;
+      case 3:
+
+        break;
+      case 4:
+
+        break;
+      case 5:
+
+        break;
+      case 6:
+
+        break;
+      case 7:
+
+        break;
+      case 8:
+
+        break;
+      case 9:
+
+        break;
+      case 10:
+
+        break;
+      case 11:
+
+        break;
+      case 12:
+
+        break;
+      case 13:
+
+        break;
+      case 14:
+
+        break;
+      case 15:
+
+        break;
+      case 16:
+
+        break;
+      case 17:
+
+        break;
+      case 18:
+
+        break;
+      case 19:
+
+        break;
+      case 20:
+
+        break;
+      case 21:
+
+        break;
+      case 22:
+
+        break;
+      case 23:
+
+        break;
+      case 24:
+
+        break;
+      case 25:
+
+        break;
+      case 26:
+
+        break;
+      default:
+
+        break;
+    }*/
+    setCustomMapPin();
     super.initState();
   }
 
@@ -45,6 +134,13 @@ class _AgencesState extends State<Agences> {
     });
   }
 
+
+  void setCustomMapPin() async {
+    pinLocationIcon = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(devicePixelRatio: 4),
+        'assets/images/boa_marker.png');
+  }
+
   void fetchLatData() async {
     final response = await http.get(
         'https://digitalfinances.innovstech.com/getAgenceLatLng.php?id='+widget.bankid.toString());
@@ -52,16 +148,20 @@ class _AgencesState extends State<Agences> {
     if (response.statusCode == 200) {
       setState(() {
         agences = json.decode(response.body);
-        print(agences);
         for(var a in agences){
           markers.add(Marker(
-              markerId: MarkerId(a['title']),
-              position: LatLng(double.parse(a['latitude']), double.parse(a['longitude'])),
+            markerId: MarkerId(a['title']),
+            position: LatLng(double.parse(a['latitude']), double.parse(a['longitude'])),
+            icon: getIcon()
           ));
         }
-
       });
     }
+  }
+
+  getIcon(){
+    BitmapDescriptor icon = BitmapDescriptor.fromAssetImage(createLocalImageConfiguration(context),"lib/assets/images/boa_marker.png") as BitmapDescriptor;
+    return icon;
   }
 
   @override

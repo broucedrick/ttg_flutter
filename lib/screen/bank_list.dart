@@ -97,7 +97,7 @@ class _BankListState extends State<BankList> {
                                 onPressed: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => AgenceGab(banks[index]['id'].toString())),
+                                    MaterialPageRoute(builder: (context) => AgenceGab(banks[index]['id'].toString(), banks[index]['title'].toString())),
                                   );
                                 },
 
