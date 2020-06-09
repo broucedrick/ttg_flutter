@@ -7,7 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trouvetongab/screen/bank_list.dart';
 import 'package:trouvetongab/screen/drawer_view.dart';
-import 'package:trouvetongab/screen/intro_slide.dart';
 import '../widgets/slide_dots.dart';
 import '../widgets/slide_item.dart';
 import 'package:http/http.dart' as http;
@@ -203,7 +202,7 @@ class _HomeState extends State<Home> {
                             onPressed: () {
                               Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => IntroSlide())
+                                  MaterialPageRoute(builder: (context) => Incident())
                               );
                             },
                           ),

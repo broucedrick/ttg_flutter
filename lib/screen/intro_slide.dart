@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:trouvetongab/screen/home.dart';
 import 'package:trouvetongab/widgets/intro_slide_dot.dart';
 import 'package:trouvetongab/widgets/slide_dots.dart';
 
@@ -9,7 +10,7 @@ class IntroSlide extends StatefulWidget {
 }
 
 class _IntroSlideState extends State<IntroSlide> {
-
+  bool btn_visibility = true;
   int _currentPage = 0;
   final PageController _pageController = PageController(
       initialPage: 0
@@ -39,10 +40,21 @@ class _IntroSlideState extends State<IntroSlide> {
         duration: Duration(milliseconds: 300),
         curve: Curves.easeIn
     );
+
+    if(_currentPage == slide_id.length){
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Home())
+      );
+    }
   }
 
   void prevPage(){
-    _currentPage--;
+    if(_currentPage == 0){
+      _currentPage = 0;
+    }else{
+      _currentPage--;
+    }
 
     _pageController.animateToPage(
         _currentPage,
@@ -57,6 +69,17 @@ class _IntroSlideState extends State<IntroSlide> {
   void dispose() {
     super.dispose();
     _pageController.dispose();
+  }
+
+  bool btnState(){
+    setState(() {
+      if(_currentPage == 0)
+        btn_visibility = false;
+      else
+        btn_visibility = true;
+    });
+
+    return btn_visibility;
   }
 
   _onPageChanged(int index){
@@ -74,18 +97,26 @@ class _IntroSlideState extends State<IntroSlide> {
           crossAxisAlignment: CrossAxisAlignment.start,
           direction: Axis.horizontal,
           children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(top: 28),
-              child: FlatButton(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Icon(Icons.arrow_back),
-                    Text("Retour", style: TextStyle(color: Colors.white, fontSize: 14, decoration: TextDecoration.none),),
-                  ],
-                ),
-              )
+            Visibility(
+              visible: btnState(),
+              maintainSize: true,
+              maintainAnimation: true,
+              maintainState: true,
+              child: Container(
+                  margin: EdgeInsets.only(top: 28),
+                  child: FlatButton(
+                    onPressed: prevPage,
+                    visualDensity: VisualDensity.compact,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Icon(Icons.arrow_back, color: Colors.white,),
+                        Text("Retour", style: TextStyle(color: Colors.white, fontSize: 14, decoration: TextDecoration.none),),
+                      ],
+                    ),
+                  )
+              ),
             )
           ],
         ),
