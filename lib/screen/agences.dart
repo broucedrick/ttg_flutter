@@ -152,17 +152,12 @@ class _AgencesState extends State<Agences> {
           markers.add(Marker(
             markerId: MarkerId(a['title']),
             position: LatLng(double.parse(a['latitude']), double.parse(a['longitude'])),
-            icon: getIcon()
           ));
         }
       });
     }
   }
 
-  getIcon(){
-    BitmapDescriptor icon = BitmapDescriptor.fromAssetImage(createLocalImageConfiguration(context),"lib/assets/images/boa_marker.png") as BitmapDescriptor;
-    return icon;
-  }
 
   @override
   Widget build(BuildContext context) {

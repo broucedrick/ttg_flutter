@@ -1,18 +1,21 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trouvetongab/screen/bank_list.dart';
 import 'package:trouvetongab/screen/drawer_view.dart';
+import 'package:trouvetongab/screen/intro_slide.dart';
 import '../widgets/slide_dots.dart';
 import '../widgets/slide_item.dart';
+import 'package:http/http.dart' as http;
 import '../model/slide.dart';
 import 'dart:async';
 import 'package:url_launcher/url_launcher.dart';
 import 'incident.dart';
 import 'package:trouvetongab/screen/login.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
-
 
 
 class Home extends StatefulWidget {
@@ -21,7 +24,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
+  List slideList = [];
   int _currentPage = 0;
   final PageController _pageController = PageController(
     initialPage: 0
@@ -29,14 +32,14 @@ class _HomeState extends State<Home> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  get SharedPreferences => null;
-
 
   @override
   void initState() {
+    getImageUrl();
     super.initState();
+    verf();
     Timer.periodic(Duration(seconds: 5), (Timer timer){
-      if(_currentPage < 2){
+      if(_currentPage < slideList.length-1){
         _currentPage++;
       }else{
         _currentPage = 0;
@@ -48,6 +51,17 @@ class _HomeState extends State<Home> {
         curve: Curves.easeIn
       );
     });
+  }
+
+  void getImageUrl() async {
+    final response = await http.get(
+        'https://digitalfinances.innovstech.com/getSlides.php');
+    if (response.statusCode == 200) {
+      setState(() {
+        slideList = json.decode(response.body);
+      });
+      print(slideList);
+    }
   }
 
   @override
@@ -63,7 +77,7 @@ class _HomeState extends State<Home> {
   }
 
 
-  verf()async{
+  verf() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var get = prefs.getString('email');
     if(get.toString().contains('null')){
@@ -72,7 +86,7 @@ class _HomeState extends State<Home> {
         //MaterialPageRoute(builder: (context) => Login()),
       //);
     }else{
-
+      print('rien');
     }
   }
   
@@ -111,7 +125,13 @@ class _HomeState extends State<Home> {
                     controller: _pageController,
                     onPageChanged: _onPageChanged,
                     itemCount: slideList.length,
-                    itemBuilder: (ctxt, i) => SlideItem(i),
+                    itemBuilder: (ctxt, i) => Container(
+                      decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          image: DecorationImage(image: NetworkImage('http://digitalfinances.innovstech.com/backoffice/img/post/'+slideList[i]['image'].toString().trim()),
+                              fit: BoxFit.fill)
+                      ),
+                    ),
                   ),
                   Stack(
                     alignment: AlignmentDirectional.topStart,
@@ -183,7 +203,7 @@ class _HomeState extends State<Home> {
                             onPressed: () {
                               Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => Incident())
+                                  MaterialPageRoute(builder: (context) => IntroSlide())
                               );
                             },
                           ),

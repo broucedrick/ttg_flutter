@@ -61,9 +61,6 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/img1.jpg
-    - assets/images/img2.jpg
-    - assets/images/img3.jpg
     - assets/images/df_logo.png
     - assets/images/Favicon_trouve_ton_gab.png
     - assets/images/boa_marker.png

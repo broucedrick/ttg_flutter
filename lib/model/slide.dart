@@ -1,4 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+
+
 
 class Slide {
   final String imageUrl;
@@ -7,16 +13,3 @@ class Slide {
     @required this.imageUrl
   });
 }
-
-
-final slideList = [
-  Slide(
-    imageUrl: "assets/images/img1.jpg"
-  ),
-  Slide(
-    imageUrl: "assets/images/img2.jpg"
-  ),
-  Slide(
-    imageUrl: "assets/images/img3.jpg"
-  )
-];

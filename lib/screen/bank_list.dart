@@ -91,7 +91,7 @@ class _BankListState extends State<BankList> {
                             constraints: BoxConstraints.expand(),
                             child:FlatButton(
                                 color: Colors.white,
-                                child: Image.network('https://digitalfinances.innovstech.com/img/'+
+                                child: Image.network('http://digitalfinances.innovstech.com/backoffice/img/post/'+
                                   banks[index]['image'],
                                 ),
                                 onPressed: () {
