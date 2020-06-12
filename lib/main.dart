@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:trouvetongab/screen/progressView.dart';
 import './screen/home.dart';
 import './screen/intro_slide.dart';
-import './screen/splash.dart';
 
 
 void main() {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Trouve Ton GAB',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home: Splash(),
+      home: ProgressView(),
     );
   }
 }
