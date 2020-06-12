@@ -92,6 +92,7 @@ class _HomeState extends State<Home> {
   
   @override
   Widget build(BuildContext context) {
+
     verf();
     Color df_yellow = Color(0xffe2b80e);
     var mediaQuery = MediaQuery.of(context);
@@ -253,5 +254,4 @@ class _HomeState extends State<Home> {
       throw 'Could not launch $url';
     }
   }
-
 }
