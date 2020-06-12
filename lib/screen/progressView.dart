@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trouvetongab/screen/intro_slide.dart';
@@ -34,8 +35,9 @@ class _ProgressViewState extends State<ProgressView> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Color(0xff303030),
       child: Center(
-        child: CircularProgressIndicator(),
+        child: Text("Chargement...", style: TextStyle(color: Colors.white, decoration: TextDecoration.none, fontSize: 16),),
       )
     );
   }
