@@ -26,14 +26,21 @@ dependencies:
   webview_flutter: ^0.3.22+1
   google_maps_flutter: ^0.5.28+1
   location: ^3.0.0
+  flutter_launcher_icons: ^0.7.5
   form_field_validator: ^1.0.1
   flutter_signin_button: ^1.0.0
   rflutter_alert: ^1.0.3
   progress_dialog: ^1.2.3
   shared_preferences: ^0.5.7+3
   http: ^0.12.1
+  animated_splash: ^1.0.0
   flutter:
     sdk: flutter
+
+flutter_icons:
+  image_path: "assets/images/Favicon_trouve_ton_gab.png"
+  android: true
+  ios: true
 
 
 dependency_overrides:

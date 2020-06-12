@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:location/location.dart';
 import 'dart:async';
 import 'dart:convert';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:trouvetongab/screen/agence_gab.dart';
 
@@ -121,7 +122,7 @@ class _BankListState extends State<BankList> {
                             constraints: BoxConstraints.expand(),
                             child:FlatButton(
                                 color: Colors.white,
-                                child: Image.network('http://digitalfinances.innovstech.com/backoffice/img/post/'+
+                                child: Image.network('http://digitalfinances.innovstech.com/img/'+
                                   banks[index]['image'],
                                 ),
                                 onPressed: () {

@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trouvetongab/screen/bank_list.dart';
 import 'package:trouvetongab/screen/drawer_view.dart';
+import 'package:trouvetongab/screen/intro_slide.dart';
 import '../widgets/slide_dots.dart';
 import '../widgets/slide_item.dart';
 import 'package:http/http.dart' as http;
@@ -91,6 +92,7 @@ class _HomeState extends State<Home> {
   
   @override
   Widget build(BuildContext context) {
+
     verf();
     Color df_yellow = Color(0xffe2b80e);
     var mediaQuery = MediaQuery.of(context);
@@ -252,5 +254,4 @@ class _HomeState extends State<Home> {
       throw 'Could not launch $url';
     }
   }
-
 }
