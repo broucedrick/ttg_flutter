@@ -168,7 +168,7 @@ class _AgencesState extends State<Agences> {
         children: <Widget>[
           Expanded(
             child: GoogleMap(
-              mapType: MapType.normal,
+              mapType: MapType.hybrid,
               onMapCreated: _onMapCreated,
               markers: Set.of(markers),
               myLocationEnabled: true,

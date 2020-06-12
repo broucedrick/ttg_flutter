@@ -177,8 +177,8 @@ class _State extends State<Login> {
                     padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                     child: SignInButton(
 
-                      Buttons.Facebook,
-                      text:"connexion avec Facebook",
+                      Buttons.Apple,
+                      text:"connexion avec apple",
                       onPressed: (){
 
                         //fonction connection
