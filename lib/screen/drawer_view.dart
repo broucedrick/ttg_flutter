@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:trouvetongab/screen/infos.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:trouvetongab/screen/login.dart';
+import 'package:trouvetongab/screen/loginn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -12,7 +12,7 @@ deco()async {
   prefs.remove('email');
   BuildContext context;
   Navigator.push(context,
-    MaterialPageRoute(builder: (context) => Login()),
+    MaterialPageRoute(builder: (context) => Loginn()),
   );
 }
 

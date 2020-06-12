@@ -9,12 +9,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 
-class Login extends StatefulWidget {
+class Logi extends StatefulWidget {
   @override
   _State createState() => _State();
 }
 
-class _State extends State<Login> {
+class _State extends State<Logi> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -35,7 +35,7 @@ class _State extends State<Login> {
           //  onPressed: () => Navigator.pop(context),
           onPressed:(){
             Navigator.push(context,
-              MaterialPageRoute(builder: (context) => Login()),
+              MaterialPageRoute(builder: (context) => Logi()),
             );
           } ,
           width: 120,
@@ -61,7 +61,7 @@ class _State extends State<Login> {
           //  onPressed: () => Navigator.pop(context),
           onPressed:(){
             Navigator.push(context,
-              MaterialPageRoute(builder: (context) => Login()),
+              MaterialPageRoute(builder: (context) => Logi()),
             );
           } ,
           width: 120,

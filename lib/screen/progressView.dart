@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trouvetongab/screen/intro_slide.dart';
+import 'package:trouvetongab/screen/loginn.dart';
 
 import 'home.dart';
 
@@ -19,15 +20,23 @@ class _ProgressViewState extends State<ProgressView> {
 
   void getIntro() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    print(prefs.getBool("viewed"));
-    if(prefs.getKeys() == null || prefs.getBool("viewed") == true){
+    //print(prefs.getBool("viewed"));
+    if(prefs.getKeys() == null || prefs.getBool("viewed") == false){
       Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Home()));
-    }else{
+          MaterialPageRoute(builder: (context) => Loginn()));
+
+
+    }
+    if(prefs.getKeys() == null && prefs.getBool("viewed") == false){
       Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => IntroSlide()));
+          MaterialPageRoute(builder: (context) => Loginn()));
+    }
+    else{
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Loginn()));
     }
   }
 
@@ -35,7 +44,7 @@ class _ProgressViewState extends State<ProgressView> {
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: CircularProgressIndicator(),
+        child: Text("chargement..."),
       )
     );
   }

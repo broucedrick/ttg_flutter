@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trouvetongab/screen/login.dart';
+import 'package:trouvetongab/screen/loginnnnnnnnnnnnnnnn.dart';
 import 'package:animated_splash/animated_splash.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,15 +14,12 @@ void main() {
   ));
 }
 BuildContext context;
-verf() async{
+_verf() async{
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var get = prefs.getString('email');
   if(get.toString().contains('null')){
     print(get.toString());
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => Login(),
-        ), );
+
   }else{
     print('rien');
   }
@@ -35,7 +32,6 @@ class Splash extends StatefulWidget {
 class _State extends State<Splash> {
   @override
   Widget build(BuildContext context) {
-    verf();
     return Scaffold(
         appBar: AppBar(
         ),
