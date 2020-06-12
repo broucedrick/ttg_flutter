@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trouvetongab/screen/home.dart';
 import 'package:trouvetongab/widgets/intro_slide_dot.dart';
-import 'package:trouvetongab/widgets/slide_dots.dart';
 
 class IntroSlide extends StatefulWidget {
   @override
@@ -28,8 +28,19 @@ class _IntroSlideState extends State<IntroSlide> {
   String btn_text;
 
   @override
-  void initState() {
+  void initState(){
+    getIntro();
     super.initState();
+  }
+
+  void getIntro() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print(prefs.getBool("viewed"));
+    if(prefs.getKeys() == null || prefs.getBool("viewed") == true){
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Home()));
+    }
   }
 
   void nextPage(){
@@ -67,6 +78,7 @@ class _IntroSlideState extends State<IntroSlide> {
 
   @override
   void dispose() {
+    getIntro();
     super.dispose();
     _pageController.dispose();
   }
@@ -126,6 +138,7 @@ class _IntroSlideState extends State<IntroSlide> {
               Expanded(
                 flex: 7,
                 child: PageView.builder(
+                  physics: NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   controller: _pageController,
                   onPageChanged: _onPageChanged,
@@ -179,14 +192,30 @@ class _IntroSlideState extends State<IntroSlide> {
                   padding: const EdgeInsets.only(left: 10, right: 10),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
                   color: Color(0xffe2b80e),
-                  onPressed: nextPage,
+                  onPressed: (){
+                    introView();
+                    nextPage();
+                  },
                 ),
               ),
-
             ],
           ),
         )
       ],
     );
   }
+  introView() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('viewed', true);
+  }
+  /*getIntroView() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return bool
+    bool viewed;
+    if(prefs.containsKey('viewed'))
+      viewed = prefs.getBool('viewed');
+    else
+      viewed = null;
+    return viewed;
+  }*/
 }
