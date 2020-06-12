@@ -29,18 +29,8 @@ class _IntroSlideState extends State<IntroSlide> {
 
   @override
   void initState(){
-    getIntro();
+    //getIntro();
     super.initState();
-  }
-
-  void getIntro() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    print(prefs.getBool("viewed"));
-    if(prefs.getKeys() == null || prefs.getBool("viewed") == true){
-      Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Home()));
-    }
   }
 
   void nextPage(){
@@ -77,8 +67,7 @@ class _IntroSlideState extends State<IntroSlide> {
 
 
   @override
-  void dispose() {
-    getIntro();
+  void dispose() {;
     super.dispose();
     _pageController.dispose();
   }
