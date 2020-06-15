@@ -15,7 +15,6 @@ import '../model/slide.dart';
 import 'dart:async';
 import 'package:url_launcher/url_launcher.dart';
 import 'incident.dart';
-import 'package:trouvetongab/screen/loginnnnnnnnnnnnnnnn.dart';
 
 
 class Home extends StatefulWidget {
