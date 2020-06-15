@@ -101,7 +101,7 @@ class _State extends State<Logi> {
         prefs.setString('email', emailController.text);
         if(pr.isShowing()){
           pr.hide();
-          Navigator.push(context,
+          Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => Home()),
           );
         }else{
@@ -109,7 +109,7 @@ class _State extends State<Logi> {
          // print('connection reuissi');
          //var pref = await prefs.setString('email', emailController.toString());
          //print(emailController.toString());
-          Navigator.push(context,
+          Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => Home()),
           );
         }
@@ -168,104 +168,141 @@ class _State extends State<Logi> {
         appBar: AppBar(
           title: Text('Login'),
         ),
-        body: Padding(
-            padding: EdgeInsets.all(10),
-            child: ListView(
-              children: <Widget>[
-                Container(
-                    height: 50,
-                    padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                    child: SignInButton(
-
-                      Buttons.Facebook,
-                      text:"connexion avec Facebook",
-                      onPressed: (){
-
-                        //fonction connection
-                      },
-                    )),
-                Container(
-                    alignment: Alignment.center,
+        body: Container(
+          child: Column(
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.all(20),
+                alignment: AlignmentDirectional.center,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Image(image: AssetImage('assets/images/Favicon_trouve_ton_gab.png'),width: MediaQuery.of(context).size.width/5,),
+                    Text("Trouve ton GAB", textAlign: TextAlign.center, style: TextStyle(fontSize: 20), ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.only(left: 30, top: 30, right: 30),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)), color: Colors.white),
+                  child: Padding(
                     padding: EdgeInsets.all(10),
-                    child: Text(
-                      'Ou',
-                      style: TextStyle(fontSize: 20),
-                    )),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: TextField(
-                    controller: emailController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'email',
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                  child: TextField(
-                    obscureText: true,
-                    controller: passwordController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Mot de passe',
-                    ),
-                  ),
-                ),
-
-                FlatButton(
-                  onPressed: (){
-                    //forgot password screen
-                  },
-                  textColor: Colors.blue,
-                  child: Text(''),
-                ),
-                Container(
-
-                    height: 50,
-                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child: RaisedButton(
-                      textColor: Colors.white,
-                      color: Colors.blue,
-                      child: Text('connexion'),
-                      onPressed: () {
-                        if(emailController.text ==""){
-                          _onBasicAlertPressed(context);
-                        }
-                        else if(passwordController.text ==""){
-                          _onBasicAlertPressed(context);
-                        }else{
-                          connection();
-                          //pr.show();
-
-                        }
-                      },
-                    )),
-                Divider(),
-
-                Container(
-
-                    child: Row(
+                    child: ListView(
                       children: <Widget>[
-                        Text("Vous n'avez pas de compte ?"),
-                        FlatButton(
-                          textColor: Colors.blue,
+                        Container(
+                          height: 50,
+                          padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                          child: SignInButton(
+
+                            Buttons.Facebook,
+                            text:"connexion avec Facebook",
+                            onPressed: (){
+
+                    //fonction connection
+                            },
+                        )),
+                        Container(
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.all(10),
                           child: Text(
-                            'inscivez vous ',
-                            style: TextStyle(fontSize: 20),
+                            'Ou',
+                            style: TextStyle(fontSize: 20, color: Colors.black),
+                          )),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: Theme(
+                            data: ThemeData(
+                              backgroundColor: Colors.black,
+                            ),
+                            child: TextField(
+                              controller: emailController,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.black, width: 1.0, style: BorderStyle.solid)),
+                                labelText: 'email',
+                              ),
+                            ),
                           ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Inscritpion()),
-                            );
-                            //signup screen
+                        ),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                          child: Theme(
+                            data: ThemeData(
+                              backgroundColor: Colors.black,
+
+                            ),
+                            child: TextField(
+                              obscureText: true,
+                              controller: passwordController,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'Mot de passe',
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        FlatButton(
+                          onPressed: (){
+                    //forgot password screen
                           },
-                        )
+                          textColor: Colors.blue,
+                          child: Text(''),
+                        ),
+                        Container(
+                          height: 50,
+                          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: RaisedButton(
+                            textColor: Colors.white,
+                            color: Colors.blue,
+                            child: Text('connexion'),
+                            onPressed: () {
+                              if(emailController.text ==""){
+                                _onBasicAlertPressed(context);
+                              }
+                              else if(passwordController.text ==""){
+                                _onBasicAlertPressed(context);
+                              }else{
+                                connection();
+                    //pr.show();
+                              }
+                            },
+                          )),
+                        Divider(),
+
+                        Container(
+                          child: Column(
+                            children: <Widget>[
+                              Text("Vous n'avez pas de compte ?", style: TextStyle(color: Colors.black),),
+                              FlatButton(
+                                textColor: Colors.blue,
+                                child: Text(
+                                  'inscivez vous ',
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => Inscritpion()),
+                                  );
+                    //signup screen
+                                },
+                              )
+                            ],
+                            mainAxisAlignment: MainAxisAlignment.center,
+                          ))
                       ],
-                      mainAxisAlignment: MainAxisAlignment.center,
-                    ))
-              ],
-            )));
+                    )
+                  )
+                ),
+              )
+            ],
+          ),
+        ));
+
+
+
+
   }
 }
