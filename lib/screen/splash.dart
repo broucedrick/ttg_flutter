@@ -1,42 +1,63 @@
 import 'package:flutter/material.dart';
-import 'package:trouvetongab/screen/loginnnnnnnnnnnnnnnn.dart';
-import 'package:animated_splash/animated_splash.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trouvetongab/screen/progressView.dart';
+import 'dart:async';
 
-void main() {
-  runApp(MaterialApp(
-    home: AnimatedSplash(
-      imagePath: 'assets/Favicon_trouve_ton_gab.png',
-      home: Splash(),
-      duration: 2500,
-      type: AnimatedSplashType.StaticDuration,
-    ),
-  ));
-}
-BuildContext context;
-_verf() async{
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  var get = prefs.getString('email');
-  if(get.toString().contains('null')){
-    print(get.toString());
 
-  }else{
-    print('rien');
-  }
-}
+
 class Splash extends StatefulWidget {
   @override
-  _State createState() => _State();
+  State <StatefulWidget> createState() {
+    return SplashState();
+  }
 }
 
-class _State extends State<Splash> {
+
+class SplashState extends State<Splash> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    startTime();
+  }
+  startTime() async {
+    var duration = new Duration(seconds: 6);
+    return new Timer(duration, route);
+  }
+  route() {
+    Navigator.pushReplacement(context, MaterialPageRoute(
+        builder: (context) => ProgressView()
+    )
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+      body: initScreen(context),
+    );
+  }
+  initScreen(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              child: Image(image: AssetImage('assets/images/Favicon_trouve_ton_gab.png'),width: MediaQuery.of(context).size.width/5,)
+
+            ),
+            Padding(padding: EdgeInsets.only(top: 20.0)),
+            Text("Trouve ton GAB", textAlign: TextAlign.center, style: TextStyle(fontSize: 20), ),
+
+            Padding(padding: EdgeInsets.only(top: 20.0)),
+            CircularProgressIndicator(
+              backgroundColor: Colors.red,
+              strokeWidth: 1,
+              //valueColor: new AlwaysStoppedAnimation<Color>(Colors.black),
+
+            )
+          ],
         ),
-        body: Center(
-            child: Text('xxxxx',
-                style: TextStyle(color: Colors.black, fontSize: 20.0))));
+      ),
+    );
   }
 }

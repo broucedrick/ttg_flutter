@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trouvetongab/screen/intro_slide.dart';
+import 'package:trouvetongab/screen/loginn.dart';
 
 import 'home.dart';
 
@@ -14,17 +15,24 @@ class _ProgressViewState extends State<ProgressView> {
 
   @override
   void initState() {
-    getIntro();
+    //getIntro();
     super.initState();
   }
 
   void getIntro() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    print(prefs.getBool("viewed"));
-    if(prefs.getKeys() == null || prefs.getBool("viewed") == true){
+    var get =prefs.getBool("viewed");
+    if(prefs.getBool("viewed") == true){
+      if(prefs.getString("email")!= null){
       Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Home()));
+      context,
+      MaterialPageRoute(builder: (context) => Loginn()));
+      }
+      else{
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Loginn()));
+      }
     }else{
       Navigator.push(
           context,
@@ -34,6 +42,8 @@ class _ProgressViewState extends State<ProgressView> {
 
   @override
   Widget build(BuildContext context) {
+    getIntro();
+
     return Container(
       color: Color(0xff303030),
       child: Center(

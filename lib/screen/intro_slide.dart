@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trouvetongab/screen/home.dart';
+import 'package:trouvetongab/screen/loginn.dart';
+
 import 'package:trouvetongab/widgets/intro_slide_dot.dart';
 
 class IntroSlide extends StatefulWidget {
@@ -45,7 +47,7 @@ class _IntroSlideState extends State<IntroSlide> {
     if(_currentPage == slide_id.length){
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => Home())
+        MaterialPageRoute(builder: (context) => Loginn())
       );
     }
   }
@@ -193,6 +195,7 @@ class _IntroSlideState extends State<IntroSlide> {
       ],
     );
   }
+  bool share= false;
   introView() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('viewed', true);

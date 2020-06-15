@@ -98,7 +98,7 @@ class _LoginState extends State<Loginn> {
         }
       }else if(rep.body.contains(('1'))){
         print('connection reuissi');
-        prefs.setString('email', emailController.text);
+        prefs.setString('email', "ok");
         if(pr.isShowing()){
           pr.hide();
           Navigator.push(context,
