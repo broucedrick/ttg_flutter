@@ -15,7 +15,6 @@ import '../model/slide.dart';
 import 'dart:async';
 import 'package:url_launcher/url_launcher.dart';
 import 'incident.dart';
-import 'package:trouvetongab/screen/login.dart';
 
 
 class Home extends StatefulWidget {
@@ -37,7 +36,6 @@ class _HomeState extends State<Home> {
   void initState() {
     getImageUrl();
     super.initState();
-    verf();
     Timer.periodic(Duration(seconds: 5), (Timer timer){
       if(_currentPage < slideList.length-1){
         _currentPage++;
@@ -77,7 +75,7 @@ class _HomeState extends State<Home> {
   }
 
 
-  verf() async{
+  __verf() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var get = prefs.getString('email');
     if(get.toString().contains('null')){
@@ -93,7 +91,6 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
 
-    verf();
     Color df_yellow = Color(0xffe2b80e);
     var mediaQuery = MediaQuery.of(context);
     // Scaffold is a layout for the major Material Components.

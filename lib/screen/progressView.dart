@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trouvetongab/screen/intro_slide.dart';
-import 'package:trouvetongab/screen/login.dart';
 
 import 'home.dart';
+import 'login.dart';
 
 class ProgressView extends StatefulWidget {
   @override
@@ -26,16 +26,19 @@ class _ProgressViewState extends State<ProgressView> {
       if(prefs.getString("email") != null){
         Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => Home()));
+            MaterialPageRoute(builder: (context) => Home())
+        );
       }else{
         Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => Login()));
+            MaterialPageRoute(builder: (context) => Login())
+        );
       }
     }else{
       Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => IntroSlide()));
+          MaterialPageRoute(builder: (context) => IntroSlide())
+      );
     }
   }
 

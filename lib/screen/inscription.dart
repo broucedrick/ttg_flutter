@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:trouvetongab/screen/login.dart';
+import 'package:trouvetongab/screen/loginn.dart';
 import 'package:trouvetongab/screen/inscription.dart';
 
 import 'package:http/http.dart' as http;
@@ -103,13 +103,13 @@ class _State extends State<Inscritpion> {
           if(pr.isShowing()){
             pr.hide();
             Navigator.push(context,
-              MaterialPageRoute(builder: (context) => Login()),
+              MaterialPageRoute(builder: (context) => Loginn()),
             );
           }
         else{
             pr.hide();
             Navigator.push(context,
-              MaterialPageRoute(builder: (context) => Login()),
+              MaterialPageRoute(builder: (context) => Loginn()),
             );
           }
 

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:trouvetongab/screen/inscription.dart';
@@ -7,15 +8,16 @@ import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-
-class Login extends StatefulWidget {
+class Loginn extends StatefulWidget {
   @override
-  _State createState() => _State();
+  _LoginState createState() => _LoginState();
 }
 
-class _State extends State<Login> {
+class _LoginState extends State<Loginn> {
+
+
   TextEditingController emailController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
 
   _Alert_email(context) {
@@ -35,7 +37,7 @@ class _State extends State<Login> {
           //  onPressed: () => Navigator.pop(context),
           onPressed:(){
             Navigator.push(context,
-              MaterialPageRoute(builder: (context) => Login()),
+              MaterialPageRoute(builder: (context) => Loginn()),
             );
           } ,
           width: 120,
@@ -44,6 +46,7 @@ class _State extends State<Login> {
       ],
     ).show();
   }
+
   _Alert(context) {
     ProgressDialog pr = ProgressDialog(context,type: ProgressDialogType.Normal,isDismissible: true);
     Alert(
@@ -61,7 +64,7 @@ class _State extends State<Login> {
           //  onPressed: () => Navigator.pop(context),
           onPressed:(){
             Navigator.push(context,
-              MaterialPageRoute(builder: (context) => Login()),
+              MaterialPageRoute(builder: (context) => Loginn()),
             );
           } ,
           width: 120,
@@ -71,12 +74,9 @@ class _State extends State<Login> {
     ).show();
   }
 
-
-
   Future<List> connection() async {
     ProgressDialog pr = ProgressDialog(context,type: ProgressDialogType.Normal,isDismissible: true);
-   SharedPreferences prefs = await SharedPreferences.getInstance();
-
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     await pr.show();
     try{
       var rep = await  http.post("https://digitalfinances.innovstech.com/ios_connect.php", body: {
@@ -98,18 +98,18 @@ class _State extends State<Login> {
         }
       }else if(rep.body.contains(('1'))){
         print('connection reuissi');
-        prefs.setString('email', emailController.text);
+        prefs.setString('email', "ok");
         if(pr.isShowing()){
           pr.hide();
-          Navigator.pushReplacement(context,
+          Navigator.push(context,
             MaterialPageRoute(builder: (context) => Home()),
           );
         }else{
           await pr.hide();
-         // print('connection reuissi');
-         //var pref = await prefs.setString('email', emailController.toString());
-         //print(emailController.toString());
-          Navigator.pushReplacement(context,
+          // print('connection reuissi');
+          //var pref = await prefs.setString('email', emailController.toString());
+          //print(emailController.toString());
+          Navigator.push(context,
             MaterialPageRoute(builder: (context) => Home()),
           );
         }
@@ -141,7 +141,7 @@ class _State extends State<Login> {
   );
 
   _onBasicAlertPressed(context) {
-  Alert(
+    Alert(
       context: context,
       title: "ERROR",
       style:alertStyle,
@@ -162,11 +162,9 @@ class _State extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    ProgressDialog pr = ProgressDialog(context,type: ProgressDialogType.Normal,isDismissible: true);
-
     return Scaffold(
         appBar: AppBar(
-          title: Text('Login'),
+          title: Text("Login"),
         ),
         body: Container(
           child: Column(
@@ -184,54 +182,41 @@ class _State extends State<Login> {
               ),
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.only(left: 30, top: 30, right: 30),
-                  decoration: BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)), color: Colors.white),
                   child: Padding(
-                    padding: EdgeInsets.all(10),
-                    child: ListView(
-                      children: <Widget>[
-                        Container(
-                          height: 50,
-                          padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                          child: SignInButton(
+                      padding: EdgeInsets.all(10),
+                      child: ListView(
+                        children: <Widget>[
+                          Container(
+                              height: 50,
+                              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                              child: SignInButton(
 
-                            Buttons.Facebook,
-                            text:"connexion avec Facebook",
-                            onPressed: (){
+                                Buttons.Facebook,
+                                text:"connexion avec Facebook",
+                                onPressed: (){
 
-                    //fonction connection
-                            },
-                        )),
-                        Container(
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.all(10),
-                          child: Text(
-                            'Ou',
-                            style: TextStyle(fontSize: 20, color: Colors.black),
-                          )),
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          child: Theme(
-                            data: ThemeData(
-                              backgroundColor: Colors.black,
-                            ),
+                                  //fonction connection
+                                },
+                              )),
+                          Container(
+                              alignment: Alignment.center,
+                              padding: EdgeInsets.all(10),
+                              child: Text(
+                                'Ou',
+                                style: TextStyle(fontSize: 20),
+                              )),
+                          Container(
+                            padding: EdgeInsets.all(10),
                             child: TextField(
                               controller: emailController,
                               decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.black, width: 1.0, style: BorderStyle.solid)),
+                                border: OutlineInputBorder(),
                                 labelText: 'email',
                               ),
                             ),
                           ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                          child: Theme(
-                            data: ThemeData(
-                              backgroundColor: Colors.black,
-
-                            ),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                             child: TextField(
                               obscureText: true,
                               controller: passwordController,
@@ -241,68 +226,66 @@ class _State extends State<Login> {
                               ),
                             ),
                           ),
-                        ),
 
-                        FlatButton(
-                          onPressed: (){
-                    //forgot password screen
-                          },
-                          textColor: Colors.blue,
-                          child: Text(''),
-                        ),
-                        Container(
-                          height: 50,
-                          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          child: RaisedButton(
-                            textColor: Colors.white,
-                            color: Colors.blue,
-                            child: Text('connexion'),
-                            onPressed: () {
-                              if(emailController.text ==""){
-                                _onBasicAlertPressed(context);
-                              }
-                              else if(passwordController.text ==""){
-                                _onBasicAlertPressed(context);
-                              }else{
-                                connection();
-                    //pr.show();
-                              }
+                          FlatButton(
+                            onPressed: (){
+                              //forgot password screen
                             },
-                          )),
-                        Divider(),
+                            textColor: Colors.blue,
+                            child: Text(''),
+                          ),
+                          Container(
 
-                        Container(
-                          child: Column(
-                            children: <Widget>[
-                              Text("Vous n'avez pas de compte ?", style: TextStyle(color: Colors.black),),
-                              FlatButton(
-                                textColor: Colors.blue,
-                                child: Text(
-                                  'inscivez vous ',
-                                  style: TextStyle(fontSize: 20),
-                                ),
+                              height: 50,
+                              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              child: RaisedButton(
+                                textColor: Colors.white,
+                                color: Colors.blue,
+                                child: Text('connexion'),
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => Inscritpion()),
-                                  );
-                    //signup screen
+                                  if(emailController.text ==""){
+                                    _onBasicAlertPressed(context);
+                                  }
+                                  else if(passwordController.text ==""){
+                                    _onBasicAlertPressed(context);
+                                  }else{
+                                    connection();
+                                    //pr.show();
+
+                                  }
                                 },
-                              )
-                            ],
-                            mainAxisAlignment: MainAxisAlignment.center,
-                          ))
-                      ],
-                    )
-                  )
+                              )),
+                          Divider(),
+
+                          Container(
+
+                              child: Row(
+                                children: <Widget>[
+                                  Text("Vous n'avez pas de compte ?"),
+                                  FlatButton(
+                                    textColor: Colors.blue,
+                                    child: Text(
+                                      'inscivez vous ',
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => Inscritpion()),
+                                      );
+                                      //signup screen
+                                    },
+                                  )
+                                ],
+                                mainAxisAlignment: MainAxisAlignment.center,
+                              ))
+                        ],
+                      )),
                 ),
               )
             ],
           ),
-        ));
-
-
-
-
+        )
+    );
   }
 }

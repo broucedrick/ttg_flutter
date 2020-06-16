@@ -20,7 +20,7 @@ class Agences extends StatefulWidget {
 class _AgencesState extends State<Agences> {
   BitmapDescriptor pinLocationIcon;
 
-  GoogleMapController myController;
+  Completer<GoogleMapController> myController = Completer();
 
   final CameraPosition _initialPosition = CameraPosition(target: LatLng(7.539988999999998, -5.547079999999999), zoom: 6);
 
@@ -120,12 +120,23 @@ class _AgencesState extends State<Agences> {
 
         break;
     }*/
-    setCustomMapPin();
+    //setCustomMapPin();
+    setCustomMapPin("assets/images/boa_marker.png");
     super.initState();
   }
 
   void _onMapCreated(GoogleMapController controller) {
-    myController = controller;
+    setState(() async{
+      myController.complete(controller);
+      BitmapDescriptor icon = await BitmapDescriptor.fromAsset("assets/images/boa_marker.png");
+      for(var a in agences){
+        markers.add(Marker(
+            markerId: MarkerId(a['title']),
+            position: LatLng(double.parse(a['latitude']), double.parse(a['longitude'])),
+           
+        ));
+      }
+    });
   }
 
   addMarker(){
@@ -135,10 +146,10 @@ class _AgencesState extends State<Agences> {
   }
 
 
-  void setCustomMapPin() async {
+  void setCustomMapPin(String imageUrl) async {
     pinLocationIcon = await BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(devicePixelRatio: 4),
-        'assets/images/boa_marker.png');
+        ImageConfiguration(size: Size(48,48)),
+        imageUrl);
   }
 
   void fetchLatData() async {
@@ -146,14 +157,8 @@ class _AgencesState extends State<Agences> {
         'https://digitalfinances.innovstech.com/getAgenceLatLng.php?id='+widget.bankid.toString());
 
     if (response.statusCode == 200) {
-      setState(() {
+      setState(() async{
         agences = json.decode(response.body);
-        for(var a in agences){
-          markers.add(Marker(
-            markerId: MarkerId(a['title']),
-            position: LatLng(double.parse(a['latitude']), double.parse(a['longitude'])),
-          ));
-        }
       });
     }
   }
@@ -161,7 +166,7 @@ class _AgencesState extends State<Agences> {
 
   @override
   Widget build(BuildContext context) {
-
+    setCustomMapPin("assets/images/boa_marker.png");
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -172,7 +177,7 @@ class _AgencesState extends State<Agences> {
               onMapCreated: _onMapCreated,
               markers: Set.of(markers),
               myLocationEnabled: true,
-              rotateGesturesEnabled: false,
+              rotateGesturesEnabled: true,
               compassEnabled: true,
               initialCameraPosition: _initialPosition,
             ),
