@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:trouvetongab/screen/inscription.dart';
@@ -28,12 +30,18 @@ class _State extends State<Login> {
     });
   }
   Future<Null> _loginFB() async {
-    final FacebookLoginResult result =
-    await facebookSignIn.logIn(['email']);
+    final FacebookLoginResult result = await facebookSignIn.logIn(['email']);
+
 
     switch (result.status) {
+
       case FacebookLoginStatus.loggedIn:
         final FacebookAccessToken accessToken = result.accessToken;
+        final token = result.accessToken.token;
+        final graphResponse = await http.get(
+            'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${token}');
+        final   profile = jsonDecode(graphResponse.body);
+
         _showMessage('''
          Logged in!
          
@@ -43,6 +51,69 @@ class _State extends State<Login> {
          Permissions: ${accessToken.permissions}
          Declined permissions: ${accessToken.declinedPermissions}
          ''');
+    String email =profile['email'];
+    String nom =profile['name'];
+    print(email+nom);
+
+        ProgressDialog pr = ProgressDialog(context,type: ProgressDialogType.Normal,isDismissible: true);
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+
+        await pr.show();
+        try{
+          var rep = await  http.post("https://digitalfinances.innovstech.com/ios_connect.php", body: {
+            email: emailController.text,
+            nom:passwordController.text,
+          });
+          if(rep.body.contains('0')){
+            print('veillez vous inscrire');
+            pr.hide();
+            if(pr.isShowing()){
+              print('veillez vous inscrire');
+              _Alert_email(context);
+              pr.hide();
+            }
+            else{
+              _Alert_email(context);
+              print('veillez vous inscrire');
+
+            }
+          }else if(rep.body.contains(('1'))){
+            print('connection reuissi');
+            prefs.setString('email', emailController.text);
+            if(pr.isShowing()){
+              pr.hide();
+              Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => Home()),
+              );
+            }else{
+              await pr.hide();
+              // print('connection reuissi');
+              //var pref = await prefs.setString('email', emailController.toString());
+              //print(emailController.toString());
+              Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => Home()),
+              );
+            }
+          }
+        }catch(error){
+          await pr.hide();
+          print(error);
+          _Alert(context);
+          print('echec');
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
         break;
       case FacebookLoginStatus.cancelledByUser:
         _showMessage('Login cancelled by the user.');
@@ -233,7 +304,7 @@ class _State extends State<Login> {
                             Buttons.Facebook,
                             text:"connexion avec Facebook",
                             onPressed: (){
-                              _loginFB;
+                              _loginFB();
                               },
                         )),
                         Container(
