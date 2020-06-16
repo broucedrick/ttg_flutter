@@ -49,7 +49,7 @@ class SplashState extends State<Splash> {
 
             Padding(padding: EdgeInsets.only(top: 20.0)),
             CircularProgressIndicator(
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.white30,
               strokeWidth: 1,
               //valueColor: new AlwaysStoppedAnimation<Color>(Colors.black),
 

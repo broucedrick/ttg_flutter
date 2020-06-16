@@ -36,6 +36,7 @@ dependencies:
   provider: ^4.0.1
   http: ^0.12.1
   splashscreen: ^1.2.0
+  flutter_facebook_login: ^3.0.0
   flutter:
     sdk: flutter
 
