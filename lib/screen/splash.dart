@@ -42,16 +42,15 @@ class SplashState extends State<Splash> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              child: Image(image: AssetImage('assets/images/Favicon_trouve_ton_gab.png'),width: MediaQuery.of(context).size.width/4,)
+              child: Image(image: AssetImage('assets/images/Favicon_trouve_ton_gab.png'),width: MediaQuery.of(context).size.width/6,)
             ),
             Padding(padding: EdgeInsets.only(top: 20.0)),
             Text("Trouve ton GAB", textAlign: TextAlign.center, style: TextStyle(fontSize: 20), ),
 
             Padding(padding: EdgeInsets.only(top: 20.0)),
             CircularProgressIndicator(
-              backgroundColor: Colors.white,
-              strokeWidth: 1,
-              //valueColor: new AlwaysStoppedAnimation<Color>(Colors.black),
+              strokeWidth: 2,
+              valueColor: new AlwaysStoppedAnimation<Color>(Color(0xffe2b80e)),
 
             )
           ],
