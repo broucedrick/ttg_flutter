@@ -168,104 +168,133 @@ class _State extends State<Login> {
         appBar: AppBar(
           title: Text('Login'),
         ),
-        body: Padding(
-            padding: EdgeInsets.all(10),
-            child: ListView(
+        body: Container(
+          child: Column(
+            children: <Widget>[
+          Container(
+          child: Column(
               children: <Widget>[
-                Container(
-                    height: 50,
-                    padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                    child: SignInButton(
+              Container(
+              padding: EdgeInsets.all(20),
+          alignment: AlignmentDirectional.center,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Image(image: AssetImage('assets/images/Favicon_trouve_ton_gab.png'),width: MediaQuery.of(context).size.width/5,),
+              Text("Trouve ton GAB", textAlign: TextAlign.center, style: TextStyle(fontSize: 20), ),
+            ],
+          ),
+        ),
 
-                      Buttons.Apple,
-                      text:"connexion avec apple",
-                      onPressed: (){
+      Expanded(
+        child: Container(
+          padding: EdgeInsets.only(left: 30, top: 30, right: 30),
+          decoration: BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)), color: Colors.white),
+          child: Padding(
+              padding: EdgeInsets.all(10),
+              child: ListView(
+                children: <Widget>[
+                  Container(
+                      height: 50,
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                      child: SignInButton(
 
-                        //fonction connection
-                      },
-                    )),
-                Container(
-                    alignment: Alignment.center,
+                        Buttons.Apple,
+                        text:"connexion avec apple",
+                        onPressed: (){
+
+                          //fonction connection
+                        },
+                      )),
+                  Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        'Ou',
+                        style: TextStyle(fontSize: 20),
+                      )),
+                  Container(
                     padding: EdgeInsets.all(10),
-                    child: Text(
-                      'Ou',
-                      style: TextStyle(fontSize: 20),
-                    )),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: TextField(
-                    controller: emailController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'email',
+                    child: TextField(
+                      controller: emailController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'email',
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                  child: TextField(
-                    obscureText: true,
-                    controller: passwordController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Mot de passe',
+                  Container(
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    child: TextField(
+                      obscureText: true,
+                      controller: passwordController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Mot de passe',
+                      ),
                     ),
                   ),
-                ),
 
-                FlatButton(
-                  onPressed: (){
-                    //forgot password screen
-                  },
-                  textColor: Colors.blue,
-                  child: Text(''),
-                ),
-                Container(
+                  FlatButton(
+                    onPressed: (){
+                      //forgot password screen
+                    },
+                    textColor: Colors.blue,
+                    child: Text(''),
+                  ),
+                  Container(
 
-                    height: 50,
-                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child: RaisedButton(
-                      textColor: Colors.white,
-                      color: Colors.blue,
-                      child: Text('connexion'),
-                      onPressed: () {
-                        if(emailController.text ==""){
-                          _onBasicAlertPressed(context);
-                        }
-                        else if(passwordController.text ==""){
-                          _onBasicAlertPressed(context);
-                        }else{
-                          connection();
-                          //pr.show();
+                      height: 50,
+                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                      child: RaisedButton(
+                        textColor: Colors.white,
+                        color: Colors.blue,
+                        child: Text('connexion'),
+                        onPressed: () {
+                          if(emailController.text ==""){
+                            _onBasicAlertPressed(context);
+                          }
+                          else if(passwordController.text ==""){
+                            _onBasicAlertPressed(context);
+                          }else{
+                            connection();
+                            //pr.show();
 
-                        }
-                      },
-                    )),
-                Divider(),
+                          }
+                        },
+                      )),
+                  Divider(),
 
-                Container(
+                  Container(
 
-                    child: Row(
-                      children: <Widget>[
-                        Text("Vous n'avez pas de compte ?"),
-                        FlatButton(
-                          textColor: Colors.blue,
-                          child: Text(
-                            'inscivez vous ',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Inscritpion()),
-                            );
-                            //signup screen
-                          },
-                        )
-                      ],
-                      mainAxisAlignment: MainAxisAlignment.center,
-                    ))
-              ],
-            )));
+                      child: Row(
+                        children: <Widget>[
+                          Text("Vous n'avez pas de compte ?"),
+                          FlatButton(
+                            textColor: Colors.blue,
+                            child: Text(
+                              'inscivez vous ',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => Inscritpion()),
+                              );
+                              //signup screen
+                            },
+                          )
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.center,
+                      ))
+                ],
+              )),
+        ),
+      )
+            ],
+          ),
+        )
+
+
   }
 }

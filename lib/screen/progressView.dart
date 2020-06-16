@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trouvetongab/screen/intro_slide.dart';
+import 'package:trouvetongab/screen/login.dart';
 
 import 'home.dart';
 
@@ -21,12 +22,18 @@ class _ProgressViewState extends State<ProgressView> {
   void getIntro() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     print(prefs.getBool("viewed"));
-    if(prefs.getKeys() == null || prefs.getBool("viewed") == true){
-      Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Home()));
+    if(prefs.getBool("viewed") == true){
+      if(prefs.getString("email") != null){
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => Home()));
+      }else{
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => Login()));
+      }
     }else{
-      Navigator.push(
+      Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => IntroSlide()));
     }

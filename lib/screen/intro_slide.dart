@@ -43,7 +43,7 @@ class _IntroSlideState extends State<IntroSlide> {
     );
 
     if(_currentPage == slide_id.length){
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => Home())
       );
@@ -173,7 +173,7 @@ class _IntroSlideState extends State<IntroSlide> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 20, right: 20),
+                margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
                 child: RaisedButton(
                   child: Text(button_text[_currentPage],
                     style: TextStyle(fontSize: 15.0),),
@@ -196,6 +196,28 @@ class _IntroSlideState extends State<IntroSlide> {
   introView() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('viewed', true);
+  }
+
+  Future<bool> _onBackPressed() {
+    return showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+        title: new Text('Are you sure?'),
+        content: new Text('Do you want to exit an App'),
+        actions: <Widget>[
+          new GestureDetector(
+            onTap: () => Navigator.of(context).pop(false),
+            child: Text("NO"),
+          ),
+          SizedBox(height: 16),
+          new GestureDetector(
+            onTap: () => Navigator.of(context).pop(true),
+            child: Text("YES"),
+          ),
+        ],
+      ),
+    ) ??
+        false;
   }
   /*getIntroView() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
