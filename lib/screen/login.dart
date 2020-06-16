@@ -6,6 +6,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 
 
@@ -17,7 +18,41 @@ class Login extends StatefulWidget {
 class _State extends State<Login> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  String _message = 'Log in/out by pressing the buttons below.';
 
+  static final FacebookLogin facebookSignIn = new FacebookLogin();
+
+  void _showMessage(String message) {
+    setState(() {
+      _message = message;
+    });
+  }
+  Future<Null> _loginFB() async {
+    final FacebookLoginResult result =
+    await facebookSignIn.logIn(['email']);
+
+    switch (result.status) {
+      case FacebookLoginStatus.loggedIn:
+        final FacebookAccessToken accessToken = result.accessToken;
+        _showMessage('''
+         Logged in!
+         
+         Token: ${accessToken.token}
+         User id: ${accessToken.userId}
+         Expires: ${accessToken.expires}
+         Permissions: ${accessToken.permissions}
+         Declined permissions: ${accessToken.declinedPermissions}
+         ''');
+        break;
+      case FacebookLoginStatus.cancelledByUser:
+        _showMessage('Login cancelled by the user.');
+        break;
+      case FacebookLoginStatus.error:
+        _showMessage('Something went wrong with the login process.\n'
+            'Here\'s the error Facebook gave us: ${result.errorMessage}');
+        break;
+    }
+  }
   _Alert_email(context) {
     ProgressDialog pr = ProgressDialog(context,type: ProgressDialogType.Normal,isDismissible: true);
     Alert(
@@ -198,9 +233,8 @@ class _State extends State<Login> {
                             Buttons.Facebook,
                             text:"connexion avec Facebook",
                             onPressed: (){
-
-                    //fonction connection
-                            },
+                              _loginFB;
+                              },
                         )),
                         Container(
                           alignment: Alignment.center,
@@ -265,6 +299,7 @@ class _State extends State<Login> {
                                 _onBasicAlertPressed(context);
                               }else{
                                 connection();
+
                     //pr.show();
                               }
                             },
