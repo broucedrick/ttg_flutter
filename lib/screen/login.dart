@@ -120,7 +120,7 @@ class _State extends State<Login> {
     Alert(
       context: context,
       title: "ERROR",
-      style:alertStyle,
+      style: alertStyle,
       desc: "VERIFIER LA CONNECTION INTERNET",
       buttons: [
         DialogButton(

@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 import 'package:trouvetongab/model/bank.dart';
+import 'package:trouvetongab/screen/markerInfo.dart';
 import '../model/agence.dart';
 
 class Agences extends StatefulWidget {
@@ -125,33 +126,30 @@ class _AgencesState extends State<Agences> {
     super.initState();
   }
 
-  void _onMapCreated(GoogleMapController controller) {
-
+  /*void _onMapCreated(GoogleMapController controller) {
+    setState(() async{
       myController.complete(controller);
-
+      BitmapDescriptor icon = await BitmapDescriptor.fromAsset("assets/images/boa_marker.png");
       for(var a in agences){
-        setState(() async{
-          BitmapDescriptor icon = await BitmapDescriptor.fromAsset("assets/images/boa_marker.png");
-          markers.add(Marker(
-              markerId: MarkerId(a['title']),
-              position: LatLng(double.parse(a['latitude']), double.parse(a['longitude'])),
+        markers.add(Marker(
+            markerId: MarkerId(a['title']),
+            position: LatLng(double.parse(a['latitude']), double.parse(a['longitude'])),
 
-          ));
-        });
+        ));
       }
+    });
+  }*/
 
-  }
-
-  addMarker(){
+  /*addMarker(){
     setState(() {
 
     });
-  }
+  }*/
 
 
   void setCustomMapPin(String imageUrl) async {
     pinLocationIcon = await BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(size: Size(48,48)),
+        ImageConfiguration(size: Size(24.0, 24.0), devicePixelRatio: 2.5),
         imageUrl);
   }
 
@@ -178,18 +176,20 @@ class _AgencesState extends State<Agences> {
             child: GoogleMap(
               mapType: MapType.normal,
               onMapCreated: (GoogleMapController controller) {
-
                 myController.complete(controller);
+                setState(() async{
+                  setCustomMapPin("assets/images/boa_marker.png");
 
-                for(var a in agences){
-                  setState(() async{
+                  for(var a in agences) {
                     markers.add(Marker(
                       markerId: MarkerId(a['title']),
                       position: LatLng(double.parse(a['latitude']), double.parse(a['longitude'])),
+                      icon: await BitmapDescriptor.fromAssetImage(
+                        createLocalImageConfiguration(context), 'assets/images/boa_marker.png'),
+                      infoWindow: InfoWindow(title: a['title'], snippet: a['horaire']+"\n\n"+a['contact']),
                     ));
-                  });
-                }
-
+                  }
+                });
               },
               markers: Set.of(markers),
               myLocationEnabled: true,

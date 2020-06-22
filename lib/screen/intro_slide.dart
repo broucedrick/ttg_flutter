@@ -45,6 +45,7 @@ class _IntroSlideState extends State<IntroSlide> {
     );
 
     if(_currentPage == slide_id.length){
+      introView();
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => Login())
@@ -95,105 +96,110 @@ class _IntroSlideState extends State<IntroSlide> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _onBackPressed,
-      child: Flex(
-        direction: Axis.vertical,
-        children: <Widget>[
-          Flex(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            direction: Axis.horizontal,
-            children: <Widget>[
-              Visibility(
-                visible: btnState(),
-                maintainSize: true,
-                maintainAnimation: true,
-                maintainState: true,
-                child: Container(
-                    margin: EdgeInsets.only(top: 28),
-                    child: FlatButton(
-                      onPressed: prevPage,
-                      visualDensity: VisualDensity.compact,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Icon(Icons.arrow_back, color: Colors.white,),
-                          Text("Retour", style: TextStyle(color: Colors.white, fontSize: 14, decoration: TextDecoration.none),),
-                        ],
-                      ),
-                    )
-                ),
-              )
-            ],
-          ),
-          Expanded(
-            child: Column(
+      child: Container(
+        color: Color(0xff303030),
+        child: Flex(
+          direction: Axis.vertical,
+          children: <Widget>[
+            Flex(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              direction: Axis.horizontal,
               children: <Widget>[
-                Expanded(
-                  flex: 7,
-                  child: PageView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    controller: _pageController,
-                    onPageChanged: _onPageChanged,
-                    itemCount: slide_id.length,
-                    itemBuilder: (ctxt, i) => Container(
+                Visibility(
+                  visible: btnState(),
+                  maintainSize: true,
+                  maintainAnimation: true,
+                  maintainState: true,
+                  child: Container(
                       color: Color(0xff303030),
-                      alignment: AlignmentDirectional.center,
-                      padding: EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      margin: EdgeInsets.only(top: 56),
+                      child: FlatButton(
+                        onPressed: prevPage,
+                        visualDensity: VisualDensity.compact,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Icon(Icons.arrow_back, color: Colors.white,),
+                            Text("Retour", style: TextStyle(color: Colors.white, fontSize: 14, decoration: TextDecoration.none),),
+                          ],
+                        ),
+                      )
+                  ),
+                )
+              ],
+            ),
+            Expanded(
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    flex: 7,
+                    child: PageView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      controller: _pageController,
+                      onPageChanged: _onPageChanged,
+                      itemCount: slide_id.length,
+                      itemBuilder: (ctxt, i) => Container(
+                        color: Color(0xff303030),
+                        alignment: AlignmentDirectional.center,
+                        padding: EdgeInsets.all(10),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
 
-                        children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.all(20),
-                            decoration: BoxDecoration(shape: BoxShape.circle, color: Color(0xffe2b80e)),
-                            child: Text(slide_id[i].toString(), style: TextStyle(color: Colors.white, fontSize: 20, decoration: TextDecoration.none)),
-                          ),
-                          Container(
-                            margin: EdgeInsets.all(20),
-                            child: Text(desc_title[i], style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold, decoration: TextDecoration.none), textAlign: TextAlign.center),
-                          ),
-                          Text(desc[i], style: TextStyle(color: Colors.white, fontSize: 16,  decoration: TextDecoration.none), textAlign: TextAlign.center),
-                        ],
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.all(20),
+                              decoration: BoxDecoration(shape: BoxShape.circle, color: Color(0xffe2b80e)),
+                              child: Text(slide_id[i].toString(), style: TextStyle(color: Colors.white, fontSize: 20, decoration: TextDecoration.none)),
+                            ),
+                            Container(
+                              margin: EdgeInsets.all(20),
+                              child: Text(desc_title[i], style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold, decoration: TextDecoration.none), textAlign: TextAlign.center),
+                            ),
+                            Text(desc[i], style: TextStyle(color: Colors.white, fontSize: 16,  decoration: TextDecoration.none), textAlign: TextAlign.center),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 10),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      for(int i=0; i<slide_id.length; i++)
-                        if(i == _currentPage)
-                          IntroSlideDots(true)
-                        else
-                          IntroSlideDots(false)
-                    ],
+                  Container(
+                    color: Color(0xff303030),
+                    margin: const EdgeInsets.only(bottom: 10),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        for(int i=0; i<slide_id.length; i++)
+                          if(i == _currentPage)
+                            IntroSlideDots(true)
+                          else
+                            IntroSlideDots(false)
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 20, right: 20),
-                  child: RaisedButton(
-                    child: Text(button_text[_currentPage],
-                      style: TextStyle(fontSize: 15.0),),
-                    textColor: Colors.white,
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-                    color: Color(0xffe2b80e),
-                    onPressed: (){
-                      introView();
-                      nextPage();
-                    },
+                  Container(
+                    color: Color(0xff303030),
+                    margin: EdgeInsets.only(left: 20, right: 20, bottom: 30),
+                    child: RaisedButton(
+                      child: Text(button_text[_currentPage],
+                        style: TextStyle(fontSize: 15.0),),
+                      textColor: Colors.white,
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+                      color: Color(0xffe2b80e),
+                      onPressed: (){
+                        nextPage();
+                      },
+                    ),
                   ),
-                ),
-              ],
-            ),
-          )
-        ],
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
