@@ -23,7 +23,7 @@ class _ProgressViewState extends State<ProgressView> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     print(prefs.getBool("viewed"));
     if(prefs.getBool("viewed") == true){
-      if(prefs.getString("email") != null){
+      if(prefs.getString("email") != null || prefs.getString("nom") != null){
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => Home())

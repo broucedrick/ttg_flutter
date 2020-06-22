@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:trouvetongab/screen/infos.dart';
+import 'package:trouvetongab/screen/login.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:trouvetongab/screen/loginn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,10 +11,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 deco()async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.remove('email');
-  BuildContext context;
-  Navigator.push(context,
-    MaterialPageRoute(builder: (context) => Loginn()),
-  );
+  prefs.remove('nom');
+
 }
 
 class DrawerView extends StatelessWidget {
@@ -291,7 +290,10 @@ class DrawerView extends StatelessWidget {
                   title: Text('Se déconnecter'),
                   onTap: () {
                     // Update the state of the app.
-                    deco();
+                   deco();
+                    Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => Login()),
+                    );
                   },
                 ),
               ],

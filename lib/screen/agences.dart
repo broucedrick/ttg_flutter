@@ -126,17 +126,20 @@ class _AgencesState extends State<Agences> {
   }
 
   void _onMapCreated(GoogleMapController controller) {
-    setState(() async{
+
       myController.complete(controller);
-      BitmapDescriptor icon = await BitmapDescriptor.fromAsset("assets/images/boa_marker.png");
+
       for(var a in agences){
-        markers.add(Marker(
-            markerId: MarkerId(a['title']),
-            position: LatLng(double.parse(a['latitude']), double.parse(a['longitude'])),
-           
-        ));
+        setState(() async{
+          BitmapDescriptor icon = await BitmapDescriptor.fromAsset("assets/images/boa_marker.png");
+          markers.add(Marker(
+              markerId: MarkerId(a['title']),
+              position: LatLng(double.parse(a['latitude']), double.parse(a['longitude'])),
+
+          ));
+        });
       }
-    });
+
   }
 
   addMarker(){
@@ -173,8 +176,21 @@ class _AgencesState extends State<Agences> {
         children: <Widget>[
           Expanded(
             child: GoogleMap(
-              mapType: MapType.hybrid,
-              onMapCreated: _onMapCreated,
+              mapType: MapType.normal,
+              onMapCreated: (GoogleMapController controller) {
+
+                myController.complete(controller);
+
+                for(var a in agences){
+                  setState(() async{
+                    markers.add(Marker(
+                      markerId: MarkerId(a['title']),
+                      position: LatLng(double.parse(a['latitude']), double.parse(a['longitude'])),
+                    ));
+                  });
+                }
+
+              },
               markers: Set.of(markers),
               myLocationEnabled: true,
               rotateGesturesEnabled: true,
