@@ -23,8 +23,8 @@ environment:
 dependencies:
   url_launcher: ^5.4.0
   responsive_grid: ^1.1.1
-  webview_flutter: ^0.3.22+1
   google_maps_flutter: ^0.5.28+1
+  webview_flutter: ^0.3.22+1
   location: ^3.0.0
   flutter_launcher_icons: ^0.7.5
   form_field_validator: ^1.0.1
@@ -37,6 +37,7 @@ dependencies:
   http: ^0.12.1
   splashscreen: ^1.2.0
   flutter_facebook_login: ^3.0.0
+  flutter_secure_storage: ^3.3.3
   flutter:
     sdk: flutter
 
@@ -112,6 +113,17 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: Ubuntu
+      fonts:
+        - asset: fonts/Ubuntu-Bold.ttf
+        - asset: fonts/Ubuntu-BoldItalic.ttf
+        - asset: fonts/Ubuntu-Italic.ttf
+        - asset: fonts/Ubuntu-Light.ttf
+        - asset: fonts/Ubuntu-LightItalic.ttf
+        - asset: fonts/Ubuntu-Medium.ttf
+        - asset: fonts/Ubuntu-MediumItalic.ttf
+        - asset: fonts/Ubuntu-Regular.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

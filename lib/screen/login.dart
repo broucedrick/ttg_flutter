@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:apple_sign_in/apple_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:trouvetongab/screen/inscription.dart';
@@ -9,15 +9,21 @@ import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:trouvetongab/screen/secret_members_only_page.dart';
 
 
 
-class Login extends StatefulWidget {
+
+
+class  Login extends StatefulWidget {
   @override
   _State createState() => _State();
+
 }
 
-class _State extends State<Login> {
+class _State extends State<Login>  {
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   String _message = 'Log in/out by pressing the buttons below.';
@@ -231,11 +237,142 @@ class _State extends State<Login> {
     ).show();
   }
 
+
+  final Future<bool> _isAvailableFuture = AppleSignIn.isAvailable();
+  String errorMessage;
   @override
+  void initState() {
+    super.initState();
+    checkLoggedInState();
+
+    AppleSignIn.onCredentialRevoked.listen((_) {
+      print("Credentials revoked");
+    });
+  }
+
+  void logIn_apple() async {
+    final AuthorizationResult result = await AppleSignIn.performRequests([
+      AppleIdRequest(requestedScopes: [Scope.email, Scope.fullName])
+    ]);
+
+    switch (result.status) {
+      case AuthorizationStatus.authorized:
+
+      // Store user ID
+        await FlutterSecureStorage()
+            .write(key: "userId", value: result.credential.user);
+
+        //Navigate to secret page (shhh!)
+        /*Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (_) =>
+                SecretMembersOnlyPage(credential: result.credential)));*/
+        String name_appel = result.credential.fullName.givenName.toString();
+        String email_apple = result.credential.email.toString();
+        String plate = "apple";
+        senddata(name_appel, email_apple, plate);
+
+        break;
+
+      case AuthorizationStatus.error:
+        print("Sign in failed: ${result.error.localizedDescription}");
+        setState(() {
+          errorMessage = "Sign in failed 😿";
+        });
+        break;
+
+      case AuthorizationStatus.cancelled:
+        print('User cancelled');
+        break;
+    }
+  }
+  void checkLoggedInState() async {
+    final userId = await FlutterSecureStorage().read(key: "userId");
+    if (userId == null) {
+      print("No stored user ID");
+      return;
+    }
+    final credentialState = await AppleSignIn.getCredentialState(userId);
+    switch (credentialState.status) {
+      case CredentialStatus.authorized:
+        print("getCredentialState returned authorized");
+        break;
+
+      case CredentialStatus.error:
+        print(
+            "getCredentialState returned an error: ${credentialState.error.localizedDescription}");
+        break;
+
+      case CredentialStatus.revoked:
+        print("getCredentialState returned revoked");
+        break;
+
+      case CredentialStatus.notFound:
+        print("getCredentialState returned not found");
+        break;
+
+      case CredentialStatus.transferred:
+        print("getCredentialState returned not transferred");
+        break;
+    }
+  }
+
+/*  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Sign In with Apple Example App'),
+      ),
+      backgroundColor: Colors.grey,
+      body: SingleChildScrollView(
+          child: Center(
+              child: SizedBox(
+                  width: 280,
+                  child: FutureBuilder<bool>(
+                    future: _isAvailableFuture,
+                    builder: (context, isAvailableSnapshot) {
+                      if (!isAvailableSnapshot.hasData) {
+                        return Container(child: Text('Loading...'));
+                      }
+
+                      return isAvailableSnapshot.data
+                          ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 10,
+                            ),
+                            AppleSignInButton(
+                              onPressed: logIn_apple,
+                            ),
+                            if (errorMessage != null) Text(errorMessage),
+                            SizedBox(
+                              height: 500,
+                            ),
+                            RaisedButton(
+                              child: Text("Button Test Page"),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) =>
+                                            Home()));
+                              },
+                            )
+                          ])
+                          : Text(
+                          'Sign in With Apple not available. Must be run on iOS 13+');
+                    },
+                  )))),
+    );
+  }*/
+
+@override
   Widget build(BuildContext context) {
     ProgressDialog pr = ProgressDialog(context,type: ProgressDialogType.Normal,isDismissible: true);
 
     return Scaffold(
+
         appBar: AppBar(
           title: Text('Login'),
         ),
@@ -272,6 +409,12 @@ class _State extends State<Login> {
                               _loginFB();
                               },
                         )),
+                        Container(
+                          child: AppleSignInButton(
+                            onPressed: logIn_apple ///https://github.com/tomgilder/flutter_apple_sign_in/blob/master/example/lib/sign_in_page.dart,
+                          )
+
+                        ),
                         Container(
                           alignment: Alignment.center,
                           padding: EdgeInsets.all(10),
@@ -373,7 +516,5 @@ class _State extends State<Login> {
         ));
 
 
-
-
   }
-}
+  }

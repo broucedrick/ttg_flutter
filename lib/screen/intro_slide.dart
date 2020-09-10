@@ -105,28 +105,7 @@ class _IntroSlideState extends State<IntroSlide> {
               crossAxisAlignment: CrossAxisAlignment.start,
               direction: Axis.horizontal,
               children: <Widget>[
-                Visibility(
-                  visible: btnState(),
-                  maintainSize: true,
-                  maintainAnimation: true,
-                  maintainState: true,
-                  child: Container(
-                      color: Color(0xff303030),
-                      margin: EdgeInsets.only(top: 56),
-                      child: FlatButton(
-                        onPressed: prevPage,
-                        visualDensity: VisualDensity.compact,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Icon(Icons.arrow_back, color: Colors.white,),
-                            Text("Retour", style: TextStyle(color: Colors.white, fontSize: 14, decoration: TextDecoration.none),),
-                          ],
-                        ),
-                      )
-                  ),
-                )
+
               ],
             ),
             Expanded(
@@ -135,7 +114,6 @@ class _IntroSlideState extends State<IntroSlide> {
                   Expanded(
                     flex: 7,
                     child: PageView.builder(
-                      physics: NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       controller: _pageController,
                       onPageChanged: _onPageChanged,

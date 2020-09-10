@@ -16,11 +16,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       title: 'Trouve Ton GAB',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
+      theme: ThemeData.dark().copyWith(
+        primaryTextTheme: ThemeData.dark().textTheme.apply(
+          fontFamily: 'Ubuntu'
+        ),
+        textTheme: ThemeData.dark().textTheme.apply(
+            fontFamily: 'Ubuntu'
+        )
+      ),
       home: Splash(),
     );
   }

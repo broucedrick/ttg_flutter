@@ -1,8 +1,9 @@
 import 'dart:convert';
-
+import 'dart:html';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:location/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trouvetongab/screen/bank_list.dart';
@@ -87,6 +88,8 @@ class _HomeState extends State<Home> {
       print('rien');
     }
   }
+
+
   
   @override
   Widget build(BuildContext context) {
@@ -182,7 +185,7 @@ class _HomeState extends State<Home> {
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => BankList()),
+                                MaterialPageRoute(builder: (context) => BankList())
                               );
                             },
                           ),

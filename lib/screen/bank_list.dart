@@ -33,12 +33,34 @@ class Bank {
 class _BankListState extends State<BankList> {
 
   List banks = [];
+  bool en_location = false;
+
+
+  @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
 
   @override
   void initState() {
     fetchData();
     getLocationPermission();
     super.initState();
+  }
+
+
+
+  void fetchData() async {
+    final response = await http.get(
+        'https://digitalfinances.innovstech.com/getBanque.php');
+
+    if (response.statusCode == 200) {
+      setState(() {
+        banks = json.decode(response.body);
+      });
+    }
   }
 
   void getLocationPermission() async {
@@ -65,17 +87,6 @@ class _BankListState extends State<BankList> {
     }
 
     _locationData = await location.getLocation();
-  }
-
-  void fetchData() async {
-    final response = await http.get(
-        'https://digitalfinances.innovstech.com/getBanque.php');
-
-    if (response.statusCode == 200) {
-      setState(() {
-        banks = json.decode(response.body);
-      });
-    }
   }
 
   @override
