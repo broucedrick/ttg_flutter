@@ -48,8 +48,8 @@ class _State extends State<Login>  {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('nom', nom);
       var pre = prefs.getString('nom');
-      print(pre);
-      Navigator.push(context,
+      print('dans senddata');
+      Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (context) => Home()),
       );
     }catch(error){
@@ -82,8 +82,19 @@ class _State extends State<Login>  {
     String email =profile['email'];
     String nom =profile['name'];
     String Id =profile['id'];
- print(profile);
-    senddata(nom,email,Id);
+    print(profile);
+    print(email);
+    print(nom);
+    print(Id);
+    if(email.toString().contains('null')){
+      email = "pas d'email";
+      print(email);
+      senddata(nom,email,Id);
+    }else{
+      print(email);
+      senddata(nom,email,Id);
+    }
+
 
         break;
       case FacebookLoginStatus.cancelledByUser:
