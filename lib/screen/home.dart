@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -24,6 +25,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List slideList = [];
+  List<Widget> slides = [];
   int _currentPage = 0;
   final PageController _pageController = PageController(
     initialPage: 0
@@ -34,9 +36,10 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    getImageUrl();
+    getSlide();
+    //getImageUrl();
     super.initState();
-    Timer.periodic(Duration(seconds: 5), (Timer timer){
+    /*Timer.periodic(Duration(seconds: 5), (Timer timer){
       if(_currentPage < slideList.length-1){
         _currentPage++;
       }else{
@@ -48,7 +51,26 @@ class _HomeState extends State<Home> {
         duration: Duration(milliseconds: 300), 
         curve: Curves.easeIn
       );
-    });
+    });*/
+  }
+
+  Future<void> getSlide() async{
+    final response = await http.get('https://digitalfinances.innovstech.com/getSlides.php');
+    if (response.statusCode == 200) {
+      setState(() {
+        slideList = json.decode(response.body);
+        for(int i=0; i<slideList.length; i++){
+          slides.add(FadeInImage.assetNetwork(
+            width: MediaQuery.of(context).size.width,
+            placeholder: 'assets/loading_100.gif',
+            image: 'http://digitalfinances.innovstech.com/backoffice/img/post/'+slideList[i]['image'].toString().trim(),
+            fit: BoxFit.contain,
+          ));
+        }
+      });
+    }else{
+      print("erreur - message de vie");
+    }
   }
 
   void getImageUrl() async {
@@ -115,6 +137,49 @@ class _HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
+              child: Column(
+                children: [
+                  Container(
+                      child: CarouselSlider(
+                        options: CarouselOptions(
+                            viewportFraction: 1,
+                            aspectRatio: 2,
+                            enlargeStrategy: CenterPageEnlargeStrategy.height,
+                            autoPlay: true,
+                            autoPlayInterval: Duration(seconds: 8),
+                            autoPlayAnimationDuration: Duration(milliseconds: 800),
+                            autoPlayCurve: Curves.fastOutSlowIn,
+                            pauseAutoPlayOnTouch: true,
+                            onPageChanged: (index, reason) {
+                              setState(() {
+                                _currentPage = index;
+                              });
+                            }
+                        ),
+                        items: slides,
+                      )
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: slides.map((url) {
+                      int index = slides.indexOf(url);
+                      return Container(
+                        width: 8.0,
+                        height: 8.0,
+                        margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: _currentPage == index
+                              ? Color(0xffe2b80e)
+                              : Colors.white,
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ],
+              ),
+            ),
+            /*Container(
               width: mediaQuery.size.width,
               height: mediaQuery.size.height/4,
               child: Stack(
@@ -156,7 +221,7 @@ class _HomeState extends State<Home> {
               ),
 
 
-            ),
+            ),*/
             Container(
               width: mediaQuery.size.width,
               height: mediaQuery.size.height/2,

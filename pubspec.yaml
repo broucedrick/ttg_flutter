@@ -38,6 +38,7 @@ dependencies:
   splashscreen: ^1.2.0
   flutter_facebook_login: ^3.0.0
   flutter_secure_storage: ^3.3.3
+  carousel_slider: ^2.2.1
   flutter:
     sdk: flutter
 
@@ -101,6 +102,7 @@ flutter:
     - assets/images/stc_marker.png
     - assets/images/uba_marker.png
     - assets/images/versus_marker.png
+    - assets/images/loading_100.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

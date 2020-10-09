@@ -34,7 +34,7 @@ class DrawerView extends StatelessWidget {
       "•\tSimplicité: utilisation facile et conviviale des fonctionnalités\n" +
       "•\t\n" +
       "Besoin d’information ou d’assistance ?\n" +
-      "Pour tout savoir sur l’appli TROUVE TON GAB (TTG) , contactez-nous via le Call Center au +20003396 , le Chat Bot (site web et facebook messenger) ;whatsapp :50252526 ou par email : info@digitalefinances.com\n";
+      "Pour tout savoir sur l’appli TROUVE TON GAB (TTG) , contactez-nous via le Call Center au +20001984 , le Chat Bot (site web et facebook messenger) ;whatsapp :50252526 ou par email : info@digitalefinances.com\n";
 
   String mentions = "•\tIdentité\n" +
       "Dénomination sociale de l’éditeur :DIGITALE FINANCES\n" +
@@ -42,10 +42,8 @@ class DrawerView extends StatelessWidget {
       "RCCM :Abidjan  CI-ABJ-2019-B-17722\n" +
       "\n" +
       "SIEGE SOCIAL LEGAL: COCODY LES 2 PLTX ENA-RUEK22-TEL\n" +
-      "TEL:00 225 20 00 33 96\n" +
+      "TEL:00 225 20 00 19 84\n" +
       "ADRESSE WEB : www.digitalefinances.com\n" +
-      "\n" +
-      "Représentant legal : M.Mamadou DIARRASSOUBA\n" +
       "\n" +
       "•\tRègles professionnelles\n" +
       "TROUVE TON GAB est un service innovant, performant et intuitif qui vous permet d’informer les clients  (de toutes les banques ) de la disponibilité de leur GAB/DAB  en live en plus de leur géolocalisation, et ce , depuis votre smartphone ou tablette. \n" +
